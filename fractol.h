@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/05 02:14:48 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/05 19:23:41 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ struct	s_img
 
 struct	s_key
 {
-	unsigned char	down[40];
-	short			oct;
-	short			bit;
-	short			mask;
-	unsigned int	*pt;
 };
 
 struct	s_mlx
@@ -51,10 +46,12 @@ struct	s_mlx
 	int		*pic;
 
 	t_key	key;
+	int		key_down[300];
 };
 
 int		press(int key, void *p);
 int		release(int key, void *p);
-void	ft_init_key(t_key *key);
+void	ft_init_key(t_mlx *w);
+int		ft_key(t_mlx *w);
 
 #endif

@@ -6,12 +6,18 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 16:06:08 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/05 01:13:21 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/05 17:49:04 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define NO_ARGS 0
+# define TOO_MUCH_ARGS 1
+# define NO_MEM 2
+# define WRONG_FD 3
+# define INVALID_FILE 4
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
