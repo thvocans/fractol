@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/05 19:23:41 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/07 20:38:10 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 typedef struct s_img	t_img;
 typedef struct s_key	t_key;
+typedef struct s_man	t_man;
 typedef struct s_mlx	t_mlx;
 
 struct	s_img
@@ -36,6 +37,15 @@ struct	s_img
 
 struct	s_key
 {
+	unsigned char	down[40];
+	short			oct;
+	short			bit;
+	short			mask;
+	unsigned int	*pt;
+};
+
+struct	s_man
+{
 };
 
 struct	s_mlx
@@ -44,14 +54,15 @@ struct	s_mlx
 	void	*win;
 	t_img	img;
 	int		*pic;
-
+	
+	t_man	mandel;
 	t_key	key;
 	int		key_down[300];
 };
 
 int		press(int key, void *p);
 int		release(int key, void *p);
-void	ft_init_key(t_mlx *w);
+void	ft_init_key(t_key *key);
 int		ft_key(t_mlx *w);
 
 #endif
