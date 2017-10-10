@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/10 16:04:41 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/10 20:29:10 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	ft_mandelbrot(t_mlx *w)
 {
 	int iY;
 	int iX;
-	int iYmax = 640;
-	int iXmax = 560;
+	int iXmax = 640;
+	int iYmax = 480;
 	long double Cx;
 	long double Cy;
-	long double CxMin = -3;
-	long double CxMax = 1;
+	long double CxMin = -2.5;
+	long double CxMax = 1.5;
 	long double CyMin = -2.0;
 	long double CyMax = 2.0;
 	long double PixelWidth = (CxMax - CxMin) / iXmax;
@@ -55,6 +55,7 @@ void	ft_mandelbrot(t_mlx *w)
 	long double EscapeRadius = 2;
 	long double ER2 = EscapeRadius * EscapeRadius;
 	int actuel = 0;
+	unsigned char *color;
 
 	for (iY = 0;iY < iYmax; iY++)
 	{
@@ -78,10 +79,13 @@ void	ft_mandelbrot(t_mlx *w)
 				Zy2	= Zy * Zy;
 				Iteration++;
 			}
-			printf("iY:%d iX:%d\n",iY, iX);
 			if (Iteration != IterationMax)
 			{
-				w->pic[(iY * (LARG)) + iX] = 0xFFFFFF;
+				color = (unsigned char *)&w->pic[(iY * (LARG)) + iX];
+				color[0] = 0;	//B
+				color[1] = 0;	//G
+				color[2] = 255;	//R
+				color[3] = 128;	//A
 			}
 			actuel++;
 		}
@@ -126,6 +130,12 @@ mlx_put_image_to_window(w->mlx, w->win, w->img.pt, 0, 0);
 		pj += 0.008;
 		}
 		*/
+int	pressmouse(int *button, t_mlx *w)
+{
+	if (w)
+		printf("%d\n", *button);
+	return 0;
+}
 
 int		main(int ac, char **av)
 {
@@ -144,6 +154,8 @@ int		main(int ac, char **av)
 	mlx_do_key_autorepeatoff(&w);
 	mlx_hook(w.win, 2, (1L << 0), &press, &w);
 	mlx_hook(w.win, 3, (1L << 1), &release, &w);
+	mlx_hook(w.win, 4, (1L << 2), &pressmouse, &w);
+//	mlx_hook(w.win, 5, (1L << 3), &releasemouse, &w);
 	mlx_loop_hook(w.mlx, &ft_latent, &w);
 	mlx_loop(w.mlx);
 }
