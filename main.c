@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/11 20:04:38 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/11 21:56:53 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_init(t_man *m)
 	m->EscapeRadius = 2;
 	m->ER2 = m->EscapeRadius * m->EscapeRadius;
 }
+
 void	ft_mandelbrot(t_mlx *w)
 {
 	t_man	*m;
@@ -90,19 +91,25 @@ int	pressmouse(int button, void *p)
 {
 	t_mlx	*w;
 	w = (t_mlx *)p;
-	printf("%d\n", w->key.down[0]);
 	if (w)
-		printf("%d\n", button);
+		printf("%p\n", p);
 	if (button == 1)
 	{
 	}
-	return 0;
+	return (0);
 }
+
+void	ft_test(t_man *m)
+{
+	printf("%Lf\n", m->CxMin);
+}	
 
 int		main(int ac, char **av)
 {
-	t_mlx w;
+	t_mlx	w;
+	void	*p;
 
+	p = &w;
 	if (ac < 1)
 		ft_error(NO_ARGS);
 	ft_init_key(&w.key);
@@ -115,12 +122,13 @@ int		main(int ac, char **av)
 	printf("%Lf\n", w.man.CxMin);
 	ft_init(&w.man);
 	ft_mandelbrot(&w);
-	printf("%Lf\n", w.man.CxMin);
+	ft_test(&w.man);
+	printf("main:%p\n", p);
 	mlx_do_key_autorepeatoff(&w);
 	mlx_hook(w.win, 2, (1L << 0), &press, &w);
 	mlx_hook(w.win, 3, (1L << 1), &release, &w);
-	mlx_hook(w.win, 4, (1L << 2), &pressmouse, &w);
+	mlx_hook(w.win, 4, (1L << 2), &press, &w);
 //	mlx_hook(w.win, 5, (1L << 3), &releasemouse, &w);
-	mlx_loop_hook(w.mlx, &ft_latent, &w);
+//	mlx_loop_hook(w.mlx, &ft_latent, &w);
 	mlx_loop(w.mlx);
 }

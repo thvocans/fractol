@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 19:17:43 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/07 20:33:54 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/11 21:33:03 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int					press(int key, void *p)
 	t_mlx *w;
 
 	w = (t_mlx*)p;
+	printf("kpress:%p\n", p);
 	w->key.oct = key / 8;
 	w->key.bit = key % 8;
 	w->key.mask = (char)(1 << w->key.bit);
@@ -50,6 +51,7 @@ int					release(int key, void *p)
 	t_mlx *w;
 
 	w = (t_mlx*)p;
+	printf("krel:%p\n", p);
 	w->key.oct = key / 8;
 	w->key.bit = key % 8;
 	w->key.mask = (char)(1 << w->key.bit);
