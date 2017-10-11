@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/07 20:38:10 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/11 19:54:53 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,28 @@ struct	s_key
 
 struct	s_man
 {
+	long double Cx;
+	long double Cy;
+	long double CxMin;
+	long double CxMax;
+	long double CyMin;
+	long double CyMax;
+	long double PixelWidth;
+	long double PixelHeight;
+	long double Zx;
+	long double Zy;
+	long double Zx2;
+	long double Zy2;
+	long double EscapeRadius;
+	unsigned char *color;
+	int iY;
+	int iX;
+	int iXmax;
+	int iYmax;
+	int Iteration;
+	int IterationMax;
+	int actuel;
+long double ER2;
 };
 
 struct	s_mlx
@@ -55,7 +77,7 @@ struct	s_mlx
 	t_img	img;
 	int		*pic;
 	
-	t_man	mandel;
+	t_man	man;
 	t_key	key;
 	int		key_down[300];
 };
