@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/11 21:56:53 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/15 03:52:47 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,16 @@ int	ft_latent(/*int key,*/ t_mlx *w)
 */
 void	ft_init(t_man *m)
 {
-	m->iXmax = 640;
-	m->iYmax = 480;
+	m->iXmax = LARG;
+	m->iYmax = HAUT;
 	m->CxMin = -2.5;
 	m->CxMax = 1.5;
 	m->CyMin = -2.0;
 	m->CyMax = 2.0;
+	m->CxMin = -10;
+	m->CxMax = 10;
+	m->CyMin = -10;
+	m->CyMax = 10;
 	m->PixelWidth = (m->CxMax - m->CxMin) / m->iXmax;
 	m->PixelHeight = (m->CyMax - m->CyMin) / m->iYmax;
 	m->IterationMax = 200;
@@ -76,33 +80,103 @@ void	ft_mandelbrot(t_mlx *w)
 			if (m->Iteration != m->IterationMax)
 			{
 				m->color = (unsigned char *)&w->pic[(m->iY * (LARG)) + m->iX];
-				m->color[0] = 0;	//B
-				m->color[1] = 0;	//G
-				m->color[2] = 255;	//R
-				m->color[3] = 128;	//A
+				m->color[0] = 128;	//B
+				m->color[1] = 128;	//G
+				m->color[2] = 128;	//R
+				m->color[3] = 0;	//A
 			}
 			m->actuel++;
 		}
 	}
 	mlx_put_image_to_window(w->mlx, w->win, w->img.pt, 0, 0);
 }
+void    clear_img(int **pic)
+{
+	int i;
 
-int	pressmouse(int button, void *p)
+	i = 0;
+	while (i < (LARG * HAUT))
+		pic[0][i++] = 0;
+}
+
+int	pressmouse(int button, int x, int y,  void *p)
 {
 	t_mlx	*w;
 	w = (t_mlx *)p;
-	if (w)
-		printf("%p\n", p);
+
+	long double	m_xy[2]; //XY dans referentiel 'window'
+	long double	size_a[2]; // Referentiel 'a' (pre zoom)
+	long double size_b[2]; // Referentiel 'b' (post zoom)
+	static long double m_Ra[2]; //XY dans referentiel 'a'
+	long double m_Rb[2]; //XY dans ref post zoom
+	long double	ra_rb[2]; //Ra XY minus Rb ref
+	int flag = 0;
+	//cast input values
+	m_xy[0] = (long double)x;
+	m_xy[1] = (long double)y;
+	printf("%d, %d\n",x, y);
+
+	if (flag == 0)
+	{
+		size_a[0] = fabsl(w->man.CxMin) + fabsl(w->man.CxMax); // longueur ligne
+		size_a[1] = fabsl(w->man.CyMin) + fabsl(w->man.CyMax); // hauteur colonne
+		flag = 1;
+	}
+	size_b[0] = size_a[0] / 2; //x axis zoom step
+	size_b[1] = size_a[1] / 2; //y axis zoom step
+
+
 	if (button == 1)
 	{
+		clear_img(&w->pic);
+/*		// x ref a = 'x input' rapporte a echelle 'ref a'
+		m_Ra[0] = (m_xy[0] / LARG * size_a[0]) - (size_a[0] / 2);
+		m_Ra[1] = (m_xy[1] / HAUT * size_a[1]) - (size_a[1] / 2);
+printf("m_ra:%Lf	%Lf\n",m_Ra[0], m_Ra[1]);
+*/
+		// x ref a = 'x input' rapporte a echelle 'ref a' en fct de cxmin
+		m_Ra[0] = (m_xy[0] / LARG * size_a[0]) - (size_a[0] / 2);
+		m_Ra[1] = (m_xy[1] / HAUT * size_a[1]) - (size_a[1] / 2);
+printf("m_ra:%Lf	%Lf\n",m_Ra[0], m_Ra[1]);
+
+		// x ref 'b' = 'x input' in 'ref b'
+		m_Rb[0] = (m_xy[0] / LARG * size_b[0]) - (size_b[0] / 2);
+		m_Rb[1] = (m_xy[1] / HAUT * size_b[1]) - (size_b[1] / 2);
+printf("m_rb:%Lf	%Lf\n",m_Rb[0], m_Rb[1]);
+
+		// center around rb
+		ra_rb[0] = (w->man.CxMin + w->man.CxMax) / 2;
+		ra_rb[1] = (w->man.CyMin + w->man.CyMax) / 2;
+printf("ra_rb%Lf	%Lf\n",ra_rb[0], ra_rb[1]);
+
+		w->man.CxMin = (-size_b[0] / 2) - m_Rb[0];
+		w->man.CxMax = (size_b[0] / 2) - m_Rb[0];
+		w->man.CyMin = (-size_b[1] / 2) - m_Rb[1];
+		w->man.CyMax = (size_b[1] / 2) - m_Rb[1];
+		printf("%Lf, %Lf, %Lf, %Lf\n",w->man.CxMin, w->man.CxMax, w->man.CyMin, w->man.CyMax);
+
+		w->man.PixelWidth = (w->man.CxMax - w->man.CxMin) / w->man.iXmax;
+		w->man.PixelHeight = (w->man.CyMax - w->man.CyMin) / w->man.iYmax;
+		ft_mandelbrot(w);
+	}
+	if (button == 2)
+	{
+		clear_img(&w->pic);
+		ft_init(&w->man);
+		ft_mandelbrot(w);
+	}
+	if (button == 3)
+	{
+		m_Ra[0] = (m_xy[0] / LARG * size_a[0]) - (size_a[0] / 2);
+		m_Ra[1] = (m_xy[1] / HAUT * size_a[1]) - (size_a[1] / 2);
+printf("m_ra:%Lf	%Lf\n",m_Ra[0], m_Ra[1]);
+		m_Rb[0] = (m_xy[0] / LARG * size_b[0]) - (size_b[0] / 2);
+		m_Rb[1] = (m_xy[1] / HAUT * size_b[1]) - (size_b[1] / 2);
+printf("m_rb:%Lf	%Lf\n",m_Rb[0], m_Rb[1]);
+	
 	}
 	return (0);
 }
-
-void	ft_test(t_man *m)
-{
-	printf("%Lf\n", m->CxMin);
-}	
 
 int		main(int ac, char **av)
 {
@@ -119,16 +193,13 @@ int		main(int ac, char **av)
 	w.pic = (int*)mlx_get_data_addr(w.img.pt, &(w.img.bpp), &(w.img.ln),\
 			&(w.img.end));
 	av[0] = "";
-	printf("%Lf\n", w.man.CxMin);
 	ft_init(&w.man);
 	ft_mandelbrot(&w);
-	ft_test(&w.man);
-	printf("main:%p\n", p);
 	mlx_do_key_autorepeatoff(&w);
 	mlx_hook(w.win, 2, (1L << 0), &press, &w);
 	mlx_hook(w.win, 3, (1L << 1), &release, &w);
-	mlx_hook(w.win, 4, (1L << 2), &press, &w);
-//	mlx_hook(w.win, 5, (1L << 3), &releasemouse, &w);
-//	mlx_loop_hook(w.mlx, &ft_latent, &w);
+	mlx_hook(w.win, 4, (1L << 2), &pressmouse, &w);
+	//	mlx_hook(w.win, 5, (1L << 3), &releasemouse, &w);
+	mlx_loop_hook(w.mlx, &ft_latent, &w);
 	mlx_loop(w.mlx);
 }
