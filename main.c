@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/15 16:59:48 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/17 23:29:35 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,9 @@ int	pressmouse(int button, int x, int y,  void *p)
 	if (button == 1)
 	{
 		clear_img(&w->pic);
-		ra_rb[0] = ((m_xy[0] / LARG * size_a[0])  - (size_a[0] / 2)) - m_Ra[0];
-		ra_rb[1] = ((m_xy[1] / HAUT * size_a[1]) - (size_a[1] / 2)) - m_Ra[1];
-printf("ra_rb%Lf	%Lf\n",ra_rb[0], ra_rb[1]);
-
 		// x ref a = 'x input' rapporte a echelle 'ref a' en fct de cxmin
-		m_Ra[0] = (m_xy[0] / LARG * size_a[0]) - (size_a[0] / 2);
-		m_Ra[1] = (m_xy[1] / HAUT * size_a[1]) - (size_a[1] / 2);
+		m_Ra[0] = (m_xy[0] / LARG * size_a[0]) + w->man.CxMin;
+		m_Ra[1] = (m_xy[1] / HAUT * size_a[1]) + w->man.CyMin;
 printf("m_ra:%Lf	%Lf\n",m_Ra[0], m_Ra[1]);
 
 		// x ref 'b' = 'x input' in 'ref b'
@@ -145,10 +141,19 @@ printf("m_ra:%Lf	%Lf\n",m_Ra[0], m_Ra[1]);
 		m_Rb[1] = (m_xy[1] / HAUT * size_b[1]) - (size_b[1] / 2);
 printf("m_rb:%Lf	%Lf\n",m_Rb[0], m_Rb[1]);
 
-		w->man.CxMin = (-size_b[0] / 2) - m_Rb[0] /*+ ra_rb[0]*/;
-		w->man.CxMax = (size_b[0] / 2) - m_Rb[0] /*+ ra_rb[0]*/;
-		w->man.CyMin = (-size_b[1] / 2) - m_Rb[1] /*+ ra_rb[1]*/;
-		w->man.CyMax = (size_b[1] / 2) - m_Rb[1] /*+ ra_rb[1]*/;
+		ra_rb[0] = m_Ra[0] - m_Rb[0];
+		ra_rb[1] = m_Ra[1] - m_Rb[1];
+
+		w->man.CxMin = (-size_b[0] / 2)/*+ ra_rb[0]*/;
+		w->man.CxMax = (size_b[0] / 2)/*+ ra_rb[0]*/;
+		w->man.CyMin = (-size_b[1] / 2)/*+ ra_rb[1]*/;
+		w->man.CyMax = (size_b[1] / 2)/*+ ra_rb[1]*/;
+		printf("%Lf, %Lf, %Lf, %Lf\n",w->man.CxMin, w->man.CxMax, w->man.CyMin, w->man.CyMax);
+
+		w->man.CxMin += ra_rb[0];
+		w->man.CxMax += ra_rb[0];
+		w->man.CyMin += ra_rb[1];
+		w->man.CyMax += ra_rb[1];
 		printf("%Lf, %Lf, %Lf, %Lf\n",w->man.CxMin, w->man.CxMax, w->man.CyMin, w->man.CyMax);
 
 		w->man.PixelWidth = (w->man.CxMax - w->man.CxMin) / w->man.iXmax;

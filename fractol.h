@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/15 01:03:58 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/17 23:08:44 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define FRACTOL_H
 # define LARG 1000
 # define HAUT 1000
-# define LOL ;
-# define YEP =
 
 # include "sierra/mlx.h"
 # include <stdio.h>
