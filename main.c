@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/17 23:29:35 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/17 23:43:18 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ void	ft_init(t_man *m)
 	m->CxMax = 1.5;
 	m->CyMin = -2.0;
 	m->CyMax = 2.0;
-	m->CxMin = -10;
-	m->CxMax = 10;
-	m->CyMin = -10;
-	m->CyMax = 10;
 	m->PixelWidth = (m->CxMax - m->CxMin) / m->iXmax;
 	m->PixelHeight = (m->CyMax - m->CyMin) / m->iYmax;
 	m->IterationMax = 200;
@@ -80,9 +76,9 @@ void	ft_mandelbrot(t_mlx *w)
 			if (m->Iteration != m->IterationMax)
 			{
 				m->color = (unsigned char *)&w->pic[(m->iY * (LARG)) + m->iX];
-				m->color[0] = 128;	//B
-				m->color[1] = 128;	//G
-				m->color[2] = 128;	//R
+				m->color[0] = m->Iteration;	//B
+				m->color[1] = m->Iteration / 2;	//G
+				m->color[2] = m->Iteration * 2;	//R
 				m->color[3] = 0;	//A
 			}
 			m->actuel++;
