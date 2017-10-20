@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/17 23:43:18 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/20 17:56:14 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,21 @@ void	ft_mandelbrot(t_mlx *w)
 			}
 			if (m->Iteration != m->IterationMax)
 			{
-				m->color = (unsigned char *)&w->pic[(m->iY * (LARG)) + m->iX];
-				m->color[0] = m->Iteration;	//B
-				m->color[1] = m->Iteration / 2;	//G
-				m->color[2] = m->Iteration * 2;	//R
-				m->color[3] = 0;	//A
+				if (m->Iteration >= 150)
+					w->pic[(m->iY * (LARG)) + m->iX] = 0xFFFFFF;
+				else if (m->Iteration >= 100)
+					w->pic[(m->iY * (LARG)) + m->iX] = 0xCCCCCC;
+				else if (m->Iteration >= 50)
+					w->pic[(m->iY * (LARG)) + m->iX] = 0x1D5E94;
+				else if (m->Iteration >= 0)
+					w->pic[(m->iY * (LARG)) + m->iX] = 0xff99ff;
 			}
 			m->actuel++;
 		}
 	}
 	mlx_put_image_to_window(w->mlx, w->win, w->img.pt, 0, 0);
 }
+
 void    clear_img(int **pic)
 {
 	int i;
@@ -103,8 +107,8 @@ int	pressmouse(int button, int x, int y,  void *p)
 	long double	m_xy[2]; //XY dans referentiel 'window'
 	static long double	size_a[2]; // Referentiel 'a' (pre zoom)
 	long double size_b[2]; // Referentiel 'b' (post zoom)
-	static long double m_Ra[2]; //XY dans referentiel 'a'
-	long double m_Rb[2]; //XY dans ref post zoom
+	static long double m_ra[2]; //XY dans referentiel 'a'
+	long double m_rb[2]; //XY dans ref post zoom
 	long double	ra_rb[2]; //Ra XY minus Rb ref
 	static int flag = 0;
 	//cast input values
@@ -116,49 +120,33 @@ int	pressmouse(int button, int x, int y,  void *p)
 	{
 		size_a[0] = fabsl(w->man.CxMin) + fabsl(w->man.CxMax); // longueur ligne
 		size_a[1] = fabsl(w->man.CyMin) + fabsl(w->man.CyMax); // hauteur colonne
-		m_Ra[0] = 0; //origin point 500,500
-		m_Ra[1] = 0;
+		m_ra[0] = 0; //origin point 500,500
+		m_ra[1] = 0;
 		flag = 1;
 	}
 	size_b[0] = size_a[0] / 1.25; //x axis zoom step
 	size_b[1] = size_a[1] / 1.25; //y axis zoom step
-
-
 	if (button == 1)
 	{
 		clear_img(&w->pic);
 		// x ref a = 'x input' rapporte a echelle 'ref a' en fct de cxmin
-		m_Ra[0] = (m_xy[0] / LARG * size_a[0]) + w->man.CxMin;
-		m_Ra[1] = (m_xy[1] / HAUT * size_a[1]) + w->man.CyMin;
-printf("m_ra:%Lf	%Lf\n",m_Ra[0], m_Ra[1]);
-
+		m_ra[0] = (m_xy[0] / LARG * size_a[0]) + w->man.CxMin;
+		m_ra[1] = (m_xy[1] / HAUT * size_a[1]) + w->man.CyMin;
 		// x ref 'b' = 'x input' in 'ref b'
-		m_Rb[0] = (m_xy[0] / LARG * size_b[0]) - (size_b[0] / 2);
-		m_Rb[1] = (m_xy[1] / HAUT * size_b[1]) - (size_b[1] / 2);
-printf("m_rb:%Lf	%Lf\n",m_Rb[0], m_Rb[1]);
-
-		ra_rb[0] = m_Ra[0] - m_Rb[0];
-		ra_rb[1] = m_Ra[1] - m_Rb[1];
-
-		w->man.CxMin = (-size_b[0] / 2)/*+ ra_rb[0]*/;
-		w->man.CxMax = (size_b[0] / 2)/*+ ra_rb[0]*/;
-		w->man.CyMin = (-size_b[1] / 2)/*+ ra_rb[1]*/;
-		w->man.CyMax = (size_b[1] / 2)/*+ ra_rb[1]*/;
-		printf("%Lf, %Lf, %Lf, %Lf\n",w->man.CxMin, w->man.CxMax, w->man.CyMin, w->man.CyMax);
-
-		w->man.CxMin += ra_rb[0];
-		w->man.CxMax += ra_rb[0];
-		w->man.CyMin += ra_rb[1];
-		w->man.CyMax += ra_rb[1];
-		printf("%Lf, %Lf, %Lf, %Lf\n",w->man.CxMin, w->man.CxMax, w->man.CyMin, w->man.CyMax);
-
+		m_rb[0] = (m_xy[0] / LARG * size_b[0]) - (size_b[0] / 2);
+		m_rb[1] = (m_xy[1] / HAUT * size_b[1]) - (size_b[1] / 2);
+		ra_rb[0] = m_ra[0] - m_rb[0];
+		ra_rb[1] = m_ra[1] - m_rb[1];
+		w->man.CxMin = (-size_b[0] / 2) + ra_rb[0];
+		w->man.CxMax = (size_b[0] / 2) + ra_rb[0];
+		w->man.CyMin = (-size_b[1] / 2) + ra_rb[1];
+		w->man.CyMax = (size_b[1] / 2) + ra_rb[1];
+	//printf("%Lf, %Lf, %Lf, %Lf\n",w->man.CxMin, w->man.CxMax, w->man.CyMin, w->man.CyMax);
 		w->man.PixelWidth = (w->man.CxMax - w->man.CxMin) / w->man.iXmax;
 		w->man.PixelHeight = (w->man.CyMax - w->man.CyMin) / w->man.iYmax;
 		ft_mandelbrot(w);
 		size_a[0] = size_b[0];
 		size_a[1] = size_b[1];
-//		m_Ra[0] = m_Rb[0];
-//		m_Ra[1] = m_Rb[1];
 	}
 	if (button == 2)
 	{
@@ -169,10 +157,6 @@ printf("m_rb:%Lf	%Lf\n",m_Rb[0], m_Rb[1]);
 	}
 	if (button == 3)
 	{
-		// center around rb
-		ra_rb[0] = m_Ra[0] - ((m_xy[0] / LARG * size_a[0])  - (size_a[0] / 2));
-		ra_rb[1] = m_Ra[1] - ((m_xy[1] / HAUT * size_a[1]) - (size_a[1] / 2));
-printf("ra_rb%Lf	%Lf\n",ra_rb[0], ra_rb[1]);
 	}
 	return (0);
 }
