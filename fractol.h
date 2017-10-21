@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/17 23:35:18 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/10/20 21:17:13 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,8 @@ int		press(int key, void *p);
 int		release(int key, void *p);
 void	ft_init_key(t_key *key);
 int		ft_key(t_mlx *w);
+void	ft_init(t_man *m);
+void	ft_mandelbrot(t_mlx *w);
+int		pressmouse(int button, int x, int y, void *p);
 
 #endif
