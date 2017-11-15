@@ -6,7 +6,7 @@
 #    By: thvocans <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/23 19:03:58 by thvocans          #+#    #+#              #
-#    Updated: 2017/10/20 21:17:39 by thvocans         ###   ########.fr        #
+#    Updated: 2017/11/15 20:53:22 by thvocans         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIB = $(LIB_FOLD)/libft.a
 
 GLIB = $(GLIB_FOLD)/libmlx.a
 
-SRC = main keyboard mandelbrot mouse
+SRC = main keyboard mouse julia
 
 C_FILE = $(addsuffix .c,$(addprefix $(C_FOLDER),$(SRC)))
 

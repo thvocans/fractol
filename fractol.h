@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/20 21:17:13 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/15 21:55:40 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 typedef struct s_img	t_img;
 typedef struct s_key	t_key;
 typedef struct s_man	t_man;
+typedef struct s_jul	t_jul;
 typedef struct s_mlx	t_mlx;
 
 struct	s_img
@@ -70,6 +71,11 @@ struct	s_man
 long double ER2;
 };
 
+struct	s_jul
+{
+
+};
+
 struct	s_mlx
 {
 	void	*mlx;
@@ -78,6 +84,7 @@ struct	s_mlx
 	int		*pic;
 	
 	t_man	man;
+	t_jul	jul;
 	t_key	key;
 	int		key_down[300];
 };
@@ -89,5 +96,6 @@ int		ft_key(t_mlx *w);
 void	ft_init(t_man *m);
 void	ft_mandelbrot(t_mlx *w);
 int		pressmouse(int button, int x, int y, void *p);
+void	clear_img(int **pic);
 
 #endif

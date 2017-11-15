@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:08:11 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/15 21:46:27 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/15 20:47:38 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	ft_mandelbrot(t_mlx *w)
 		{
 			m->Cx = m->CxMin + m->iX * m->PixelWidth;
 			/* initial value of orbit = critical point Z= 0 */
-			m->Zx = 0.0;
-			m->Zy = 0.0;
+			m->Zx = 1.5;
+			m->Zy = 0.7;
 			m->Zx2 = m->Zx * m->Zx;
 			m->Zy2 = m->Zy * m->Zy;
 			m->Iteration = 0;

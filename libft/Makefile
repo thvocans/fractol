@@ -6,11 +6,11 @@
 #    By: thvocans <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/23 19:03:58 by thvocans          #+#    #+#              #
-#    Updated: 2017/10/05 01:15:05 by thvocans         ###   ########.fr        #
+#    Updated: 2017/11/06 17:40:07 by thvocans         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all fclean clean re
+.PHONY: all fclean clean re format
 
 NAME = libft.a
 
@@ -19,6 +19,10 @@ FLAGS = -Wall -Wextra -Werror -I $(H_FOLDER)
 C_FOLDER = ./
 
 H_FOLDER = ./
+
+#COL = $(shell tput cols)
+#LEN = 0
+#TEMP = A
 
 SRC = ft_memset ft_memcpy ft_memccpy ft_memmove ft_memchr ft_memcmp ft_bzero\
 	  ft_strchr ft_strrchr ft_strlcat\
@@ -45,13 +49,13 @@ all: $(NAME)
 
 $(NAME): $(O_FILE)
 	@ar rc $@ $^
-	@echo "\033[36mlibft.a OK\033[0m"
+#	@echo "\033[36mlibft.a OK\033[0m"
 	@ranlib $(NAME)
-	@echo "\033[36mranlib libft.a\033[0m"
+#	@echo "\033[36mranlib libft.a\033[0m"
 
 ./%.o: ./%.c
 	@gcc -c $(FLAGS) $< -o $@
-#	@echo -n \\033[32m$@\\033[0m	
+#	@echo "\\033[32m$@\\033[0m"
 
 clean:
 	@/bin/rm -f $(O_FILE)
