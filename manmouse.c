@@ -6,34 +6,11 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:15:18 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/18 19:55:44 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/18 17:06:43 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-int	movemouse(int x, int y, t_mlx *w)
-{
-	static int ox = 0;
-	static int oy = 0;
-	static int flag = 0;
-
-	if (flag == 0)
-	{
-		flag = 1;
-		ox = x;
-		oy = y;
-	}
-	w->jul.cRe += (float)(x - ox) / 1000;
-	w->jul.cIm += (float)(y - oy) / 1000;
-
-	printf("%f, %f\n", w->jul.cRe, w->jul.cIm);
-	clear_img(&w->pic);
-	ft_julia(w);
-	ox = x;
-	oy = y;
-	return (0);
-}
 
 int	pressmouse(int button, int x, int y,  void *p)
 {
@@ -44,8 +21,8 @@ int	pressmouse(int button, int x, int y,  void *p)
 	static long double	size_a[2]; // Referentiel 'a' (pre zoom)
 	long double size_b[2]; // Referentiel 'b' (post zoom)
 	static long double m_ra[2]; //XY dans referentiel 'a'
-//	long double m_rb[2]; //XY dans ref post zoom
-//	long double	ra_rb[2]; //Ra XY minus Rb ref
+	long double m_rb[2]; //XY dans ref post zoom
+	long double	ra_rb[2]; //Ra XY minus Rb ref
 	static int flag = 0;
 	//cast input values
 	m_xy[0] = (long double)x;
@@ -64,7 +41,7 @@ int	pressmouse(int button, int x, int y,  void *p)
 	size_b[1] = size_a[1] / 1.25; //y axis zoom step
 	if (button == 1)
 	{
-/*		clear_img(&w->pic);
+		clear_img(&w->pic);
 		// x ref a = 'x input' rapporte a echelle 'ref a' en fct de cxmin
 		m_ra[0] = (m_xy[0] / LARG * size_a[0]) + w->man.CxMin;
 		m_ra[1] = (m_xy[1] / HAUT * size_a[1]) + w->man.CyMin;
@@ -83,7 +60,7 @@ int	pressmouse(int button, int x, int y,  void *p)
 		ft_mandelbrot(w);
 		size_a[0] = size_b[0];
 		size_a[1] = size_b[1];
-*/	}
+	}
 	if (button == 2)
 	{
 		clear_img(&w->pic);

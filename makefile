@@ -6,7 +6,7 @@
 #    By: thvocans <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/23 19:03:58 by thvocans          #+#    #+#              #
-#    Updated: 2017/11/15 20:53:22 by thvocans         ###   ########.fr        #
+#    Updated: 2017/11/18 17:04:25 by thvocans         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIB = $(LIB_FOLD)/libft.a
 
 GLIB = $(GLIB_FOLD)/libmlx.a
 
-SRC = main keyboard mouse julia
+SRC = main keyboard mouse mandelbrot julia
 
 C_FILE = $(addsuffix .c,$(addprefix $(C_FOLDER),$(SRC)))
 
@@ -39,7 +39,7 @@ $(NAME): $(GLIB) $(LIB) $(O_FILE)
 	@gcc $(FLAGS) $(LIB) $(GLIB) -framework OpenGL -framework Appkit -o $@ $(O_FILE)
 	@echo "\033[32mexecutable OK\033[0m"
 
-./%.o: ./%.c
+./%.o: ./%.c ./fractol.h
 	@gcc -c $< $(FLAGS) -I$(LIB_FOLD) -o $@
 	@echo "\033[32m$@\033[0m"
 

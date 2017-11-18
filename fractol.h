@@ -6,13 +6,13 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/15 21:55:40 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/18 19:58:53 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define LARG 500
+# define LARG 600
 # define HAUT 500
 
 # include "sierra/mlx.h"
@@ -73,6 +73,18 @@ long double ER2;
 
 struct	s_jul
 {
+	int		wl;
+	int		h;
+	double	cRe;
+	double	cIm;
+	double	newRe;
+	double	newIm;
+	double	oldRe;
+	double	oldIm;
+	double	zoom;
+	double	moveX;
+	double	moveY;
+	int		maxit;
 
 };
 
@@ -82,6 +94,10 @@ struct	s_mlx
 	void	*win;
 	t_img	img;
 	int		*pic;
+
+	void	*winj;
+	t_img	imgj;
+	int		*picj;
 	
 	t_man	man;
 	t_jul	jul;
@@ -94,8 +110,12 @@ int		release(int key, void *p);
 void	ft_init_key(t_key *key);
 int		ft_key(t_mlx *w);
 void	ft_init(t_man *m);
+void	ft_jul_init(t_jul *j);
 void	ft_mandelbrot(t_mlx *w);
+void	ft_julia(t_mlx *w);
+int		ft_color(int iter);
 int		pressmouse(int button, int x, int y, void *p);
+int		movemouse(int x, int y, t_mlx *w);
 void	clear_img(int **pic);
 
 #endif
