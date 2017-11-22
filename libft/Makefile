@@ -6,7 +6,7 @@
 #    By: thvocans <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/23 19:03:58 by thvocans          #+#    #+#              #
-#    Updated: 2017/11/06 17:40:07 by thvocans         ###   ########.fr        #
+#    Updated: 2017/11/21 19:30:56 by thvocans         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ all: $(NAME)
 
 $(NAME): $(O_FILE)
 	@ar rc $@ $^
-#	@echo "\033[36mlibft.a OK\033[0m"
+	@echo "\033[36mlibft.a OK\033[0m"
 	@ranlib $(NAME)
 #	@echo "\033[36mranlib libft.a\033[0m"
 

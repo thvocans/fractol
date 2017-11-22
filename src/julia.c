@@ -6,11 +6,11 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:33:48 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/18 19:58:39 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/22 20:23:10 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../include/fractol.h"
 
 /*
 **		The Julia set
@@ -67,7 +67,7 @@ void	ft_julia(t_mlx *w)
 			}
 			//draw the pixel
 			if (i < j->maxit)
-				w->pic[(y * LARG) + x] = ft_color(i);
+				w->pic1[(y * LARG) + x] = ft_color(i);
 		}
-	mlx_put_image_to_window(w->mlx, w->win, w->img.pt, 0, 0);
+//	mlx_put_image_to_window(w->mlx, w->win, w->img.pt, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/18 19:58:53 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/22 20:13:25 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 # define LARG 600
 # define HAUT 500
 
-# include "sierra/mlx.h"
+# include "../sierra/mlx.h"
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_img	t_img;
 typedef struct s_key	t_key;
@@ -91,13 +91,13 @@ struct	s_jul
 struct	s_mlx
 {
 	void	*mlx;
-	void	*win;
-	t_img	img;
-	int		*pic;
+	void	*win1;
+	t_img	img1;
+	int		*pic1;
 
-	void	*winj;
-	t_img	imgj;
-	int		*picj;
+	void	*win2;
+	t_img	img2;
+	int		*pic2;
 	
 	t_man	man;
 	t_jul	jul;
@@ -105,11 +105,11 @@ struct	s_mlx
 	int		key_down[300];
 };
 
-int		press(int key, void *p);
-int		release(int key, void *p);
+int		press(int key, t_mlx *w);
+int		release(int key, t_mlx *w);
 void	ft_init_key(t_key *key);
-int		ft_key(t_mlx *w);
-void	ft_init(t_man *m);
+int		ft_key(t_mlx *w, void *win, int *pic);
+void	ft_mandel_init(t_man *m);
 void	ft_jul_init(t_jul *j);
 void	ft_mandelbrot(t_mlx *w);
 void	ft_julia(t_mlx *w);

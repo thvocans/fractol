@@ -6,11 +6,11 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:08:11 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/15 21:46:27 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/22 20:22:26 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../include/fractol.h"
 
 /*
 **		The Mandelbrot set
@@ -26,7 +26,7 @@
 **
 */
 
-void	ft_init(t_man *m)
+void	ft_mandel_init(t_man *m)
 {
 	m->iXmax = LARG;
 	m->iYmax = HAUT;
@@ -83,9 +83,9 @@ void	ft_mandelbrot(t_mlx *w)
 				m->Iteration++;
 			}
 			if (m->Iteration != m->IterationMax)
-					w->pic[(m->iY * (LARG)) + m->iX] = ft_color(m->Iteration);
+					w->pic1[(m->iY * (LARG)) + m->iX] = ft_color(m->Iteration);
 			m->actuel++;
 		}
 	}
-	mlx_put_image_to_window(w->mlx, w->win, w->img.pt, 0, 0);
+	mlx_put_image_to_window(w->mlx, w->win1, w->img1.pt, 0, 0);
 }

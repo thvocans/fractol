@@ -6,7 +6,7 @@
 #    By: thvocans <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/23 19:03:58 by thvocans          #+#    #+#              #
-#    Updated: 2017/11/18 17:04:25 by thvocans         ###   ########.fr        #
+#    Updated: 2017/11/22 19:37:07 by thvocans         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,22 +14,22 @@
 
 NAME = exe
 
+CC = @gcc $(FLAGS)
 FLAGS = -Wall -Wextra -Werror
 #FLAGS = -Wall -Wextra -Werror -lmlx -L./sierra -framework OpenGL -framework Appkit
 
-C_FOLDER = ./
-H_FOLDER = ./
+C_FOLD = ./src/
+#O_FOLD = ./obj
+H_FOLD = ./
 LIB_FOLD = ./libft
 GLIB_FOLD = ./sierra
-#GLIB_FOLD = ./el_capitan
 
 LIB = $(LIB_FOLD)/libft.a
-
 GLIB = $(GLIB_FOLD)/libmlx.a
 
 SRC = main keyboard mouse mandelbrot julia
 
-C_FILE = $(addsuffix .c,$(addprefix $(C_FOLDER),$(SRC)))
+C_FILE = $(addsuffix .c,$(addprefix $(C_FOLD),$(SRC)))
 
 O_FILE = $(addsuffix .o,$(SRC))
 
@@ -39,9 +39,14 @@ $(NAME): $(GLIB) $(LIB) $(O_FILE)
 	@gcc $(FLAGS) $(LIB) $(GLIB) -framework OpenGL -framework Appkit -o $@ $(O_FILE)
 	@echo "\033[32mexecutable OK\033[0m"
 
-./%.o: ./%.c ./fractol.h
+%.o: src/%.c ./include/fractol.h ./include/keyboard.h
 	@gcc -c $< $(FLAGS) -I$(LIB_FOLD) -o $@
 	@echo "\033[32m$@\033[0m"
+
+#$(O_FOLD):
+#	if [ ! -d "$(O_FOLD)/" ];then \
+#		mkdir $(O_FOLD); \
+#	fi
 
 libft.a: $(LIB)
 
