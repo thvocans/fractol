@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:15:18 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/22 20:20:59 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/23 16:26:20 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	pressmouse(int button, int x, int y,  void *p)
 	if (button == 2)
 	{
 		clear_img(&w->pic1);
-		ft_init(&w->man);
+		ft_mandel_init(&w->man);
 		flag = 0;
 		ft_mandelbrot(w);
 	}

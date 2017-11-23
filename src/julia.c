@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:33:48 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/22 20:23:10 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/23 18:51:11 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ void	ft_julia(t_mlx *w)
 			if (i < j->maxit)
 				w->pic1[(y * LARG) + x] = ft_color(i);
 		}
-//	mlx_put_image_to_window(w->mlx, w->win, w->img.pt, 0, 0);
+	mlx_put_image_to_window(w->mlx, w->win2, w->img2.pt, 0, 0);
 }

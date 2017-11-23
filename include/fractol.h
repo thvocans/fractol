@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/22 20:13:25 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/23 18:51:08 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,12 @@ struct	s_jul
 struct	s_mlx
 {
 	void	*mlx;
+	int		cur_win;
+//window1
 	void	*win1;
 	t_img	img1;
 	int		*pic1;
-
+//window2
 	void	*win2;
 	t_img	img2;
 	int		*pic2;
@@ -105,8 +107,10 @@ struct	s_mlx
 	int		key_down[300];
 };
 
-int		press(int key, t_mlx *w);
-int		release(int key, t_mlx *w);
+int		press_win1(int key, t_mlx *w);
+int		release_win1(int key, t_mlx *w);
+int		press_win2(int key, t_mlx *w);
+int		release_win2(int key, t_mlx *w);
 void	ft_init_key(t_key *key);
 int		ft_key(t_mlx *w, void *win, int *pic);
 void	ft_mandel_init(t_man *m);
@@ -115,7 +119,7 @@ void	ft_mandelbrot(t_mlx *w);
 void	ft_julia(t_mlx *w);
 int		ft_color(int iter);
 int		pressmouse(int button, int x, int y, void *p);
-int		movemouse(int x, int y, t_mlx *w);
+int		ft_move_mouse(int x, int y, t_mlx *w);
 void	clear_img(int **pic);
 
 #endif
