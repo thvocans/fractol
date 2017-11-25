@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/05 01:15:44 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/24 19:36:08 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static void	ft_invalid_file(void)
 	ft_putstr_fd("       ▀▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀▀     \n", 2);
 }
 
-void		ft_error(int error)
+int		ft_error(int error)
 {
 	if (error == 0)
 		ft_no_args();
@@ -122,4 +122,5 @@ void		ft_error(int error)
 	if (error == 4)
 		ft_invalid_file();
 	exit(1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:33:48 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/23 18:51:11 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/25 04:53:12 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 **	Matrix form bi:	(a	b) carre :	(aa + bc	ab + bd) 
 **					(c	d)			(ca + dc	cb + dd)
 **
+**	pick some values for the constant c, this determines the shape of the Julia Set
 */
 
 void	ft_jul_init(t_jul *j)
@@ -34,7 +35,6 @@ void	ft_jul_init(t_jul *j)
 	j->moveX = 0;
 	j->moveY = 0;
 	j->maxit = 200;
-	//pick some values for the constant c, this determines the shape of the Julia Set
 	j->cRe = -0.7;
 	j->cIm = 0.27015;
 }
@@ -42,19 +42,25 @@ void	ft_jul_init(t_jul *j)
 void	ft_julia(t_mlx *w)
 {
 	t_jul	*j;
+	int		x;
+	int		y;
+	int		i;
 
+	y = -1;
 	j = &(w->jul);
 	//loop through every pixel
-	for(int y = 0; y < j->h; y++)
-		for(int x = 0; x < j->wl; x++)
+	while (++y < HAUT)
+	{
+		x = -1;
+		while (++x < LARG)
 		{
-			//calculate the initial real and imaginary part of z, based on the pixel location and zoom and position values
-			j->newRe = 1.5 * (x - j->wl / 2) / (0.5 * j->zoom * j->wl) + j->moveX;
-			j->newIm = (y - j->h / 2) / (0.5 * j->zoom * j->h) + j->moveY;
+			// x : -1.5 ; 1.5 ||| y -1 ; 1 ||||
+			j->newRe = 1.5 * (x - LARG / 2) / (j->zoom * LARG / 2) + j->moveX;
+			j->newIm = (y - HAUT / 2) / (0.5 * j->zoom * HAUT) + j->moveY;
 			//i will represent the number of iterations
-			int i;
 			//start the iteration process
-			for(i = 0; i < j->maxit; i++)
+			i = -1;
+			while (++i < j->maxit)
 			{
 				//remember value of previous iteration
 				j->oldRe = j->newRe;
@@ -63,11 +69,13 @@ void	ft_julia(t_mlx *w)
 				j->newRe = j->oldRe * j->oldRe - j->oldIm * j->oldIm + j->cRe;
 				j->newIm = 2 * j->oldRe * j->oldIm + j->cIm;
 				//if the point is outside the circle with radius 2: stop
-				if((j->newRe * j->newRe + j->newIm * j->newIm) > 4) break;
+				if ((j->newRe * j->newRe + j->newIm * j->newIm) > 4)
+					break;
 			}
 			//draw the pixel
 			if (i < j->maxit)
-				w->pic1[(y * LARG) + x] = ft_color(i);
+				w->pic2[(y * LARG) + x] = ft_color(i);
 		}
-	mlx_put_image_to_window(w->mlx, w->win2, w->img2.pt, 0, 0);
+	}
+		mlx_put_image_to_window(w->mlx, w->win2, w->img2.pt, 0, 0);
 }

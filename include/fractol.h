@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/23 18:51:08 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/25 04:53:11 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,13 @@ void	ft_jul_init(t_jul *j);
 void	ft_mandelbrot(t_mlx *w);
 void	ft_julia(t_mlx *w);
 int		ft_color(int iter);
-int		pressmouse(int button, int x, int y, void *p);
+int		pressmouse(int button, int x, int y, t_mlx *w);
+int		man_mouse(int button, int x, int y, t_mlx *w);
+int		jul_mouse(int button, int x, int y, t_mlx *w);
 int		ft_move_mouse(int x, int y, t_mlx *w);
+void	ft_man_zoom(t_mlx *w, long double x, long double y, float zoom);
+void	ft_jul_zoom(t_mlx *w, long double x, long double y, float zoom);
 void	clear_img(int **pic);
+int		*ft_args_check(int ac, char **av);
 
 #endif

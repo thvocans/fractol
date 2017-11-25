@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 16:06:08 by thvocans          #+#    #+#             */
-/*   Updated: 2017/10/05 17:49:04 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/24 19:36:24 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	ft_puttab(char **tab);
 ** Latest Addons
 */
 int		gnl(const int fd, char **line);
-void	ft_error(int error);
+int		ft_error(int error);
 void	ft_wrong_fd(void);
 
 #endif

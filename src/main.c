@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/23 18:51:09 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/25 02:23:16 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ void	man_loop(t_mlx *w)
 {
 	mlx_hook(w->win1, 2, (1L << 0), &press_win1, w);
 	mlx_hook(w->win1, 3, (1L << 1), &release_win1, w);
-	mlx_hook(w->win1, 4, (1L << 2), &pressmouse, w);
+	mlx_hook(w->win1, 4, (1L << 2), &man_mouse, w);
+	mlx_hook(w->win1, 17, (1L << 17), &ft_error, (void *)5);
 }
 
 void	jul_loop(t_mlx *w)
 {
 	mlx_hook(w->win2, 2, (1L << 0), &press_win2, w);
 	mlx_hook(w->win2, 3, (1L << 1), &release_win2, w);
-	mlx_hook(w->win2, 6, (1L << 7), &ft_move_mouse, w);
+	mlx_hook(w->win2, 4, (1L << 2), &jul_mouse, w);
+//	mlx_hook(w->win2, 6, (1L << 7), &ft_move_mouse, w);
+	mlx_hook(w->win2, 17, (1L << 17), &ft_error, (void *)5);
 }
 
 int		mandel_main(t_mlx *w)
@@ -61,7 +64,6 @@ int		julia_main(t_mlx *w)
 	w->pic2 = (int*)mlx_get_data_addr(w->img2.pt, &(w->img2.bpp),\
 			&(w->img2.ln), &(w->img2.end));
 	ft_jul_init(&w->jul);
-	printf("test\n");
 	ft_julia(w);
 	mlx_put_image_to_window(w->mlx, w->win2, w->img2.pt, 0, 0);
 	jul_loop(w);
@@ -71,16 +73,16 @@ int		julia_main(t_mlx *w)
 int		main(int ac, char **av)
 {
 	t_mlx	w;
-
-	if (ac < 1)
-		ft_error(NO_ARGS);
+	int		*ag;
+	
+	ag = ft_args_check(ac, av);
 	ft_init_key(&w.key);
 	w.mlx = mlx_init();
 	av[0] = "";
-//	if (ac > 1)
-//		mandel_main(&w);
-//	if (av[2])
-	julia_main(&w);
+	if (ag[0])
+		mandel_main(&w);
+	if (ag[1])
+		julia_main(&w);
 	mlx_do_key_autorepeatoff(&w);
 	mlx_loop(w.mlx);
 }
@@ -88,11 +90,10 @@ int		main(int ac, char **av)
 
 //	mlx_hook(w.win1, 2, (1L << 0), &press_win1,  &w);
 //	mlx_hook(w.win1, 3, (1L << 1), &release_win1, &w);
-//	mlx_hook(w.win1, 4, (1L << 2), &pressmouse, &w);
+//	mlx_hook(w.win1, 4, (1L << 2), &man_mouse, &w);
 
 //	mlx_hook(w.win2, 2, (1L << 0), &press_win2, &w);
 //	mlx_hook(w.win2, 3, (1L << 1), &release_win2, &w);
 //	mlx_hook(w.win2, 6, (1L << 7), &ft_move_mouse, &w);
 //	mlx_hook(w.win, 5, (1L << 3), &releasemouse, &w);
 //	mlx_loop_hook(w->mlx, &ft_latent, &w);
-

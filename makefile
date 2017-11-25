@@ -6,7 +6,7 @@
 #    By: thvocans <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/23 19:03:58 by thvocans          #+#    #+#              #
-#    Updated: 2017/11/23 16:30:04 by thvocans         ###   ########.fr        #
+#    Updated: 2017/11/25 00:35:03 by thvocans         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,11 @@ GLIB_FOLD = ./sierra
 LIB = $(LIB_FOLD)/libft.a
 GLIB = $(GLIB_FOLD)/libmlx.a
 
-SRC = main\
+SRC = main ft_args_check\
 	  ft_key_init key_func key_action\
-	  manmouse ft_move_mouse\
-	  mandelbrot julia
+	  mouse zoom\
+	  mandelbrot\
+	  julia
 
 C_FILE = $(addsuffix .c,$(addprefix $(C_FOLD),$(SRC)))
 

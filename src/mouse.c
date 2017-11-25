@@ -6,66 +6,49 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:15:18 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/23 16:29:35 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/25 04:53:09 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-int	pressmouse(int button, int x, int y,  void *p)
+int	man_mouse(int button, int x, int y, t_mlx *w)
 {
-	t_mlx	*w;
-	w = (t_mlx *)p;
+	if (button == 4 && x >= 0 && y >= 0)
+		ft_man_zoom(w, x, y, 1.25);
+	if (button == 5 && x >= 0 && y >= 0)
+		ft_man_zoom(w, x, y, 0.8);
+	return (0);
+}
 
-	long double	m_xy[2]; //XY dans referentiel 'window'
-	static long double	size_a[2]; // Referentiel 'a' (pre zoom)
-	long double size_b[2]; // Referentiel 'b' (post zoom)
-	static long double m_ra[2]; //XY dans referentiel 'a'
-//	long double m_rb[2]; //XY dans ref post zoom
-//	long double	ra_rb[2]; //Ra XY minus Rb ref
+int jul_mouse(int button, int x, int y, t_mlx *w)
+{
+	if (button == 1 && x >= 0 && y >= 0)
+		ft_jul_zoom(w, x, y, 1.25);
+	if (button == 2 && x >= 0 && y >= 0)
+		ft_jul_zoom(w, x, y, 0.8);
+	return (0);
+}
+
+int	ft_move_mouse(int x, int y, t_mlx *w)
+{
+	static int ox = 0;
+	static int oy = 0;
 	static int flag = 0;
-	//cast input values
-	m_xy[0] = (long double)x;
-	m_xy[1] = (long double)y;
-	printf("%d, %d\n",x, y);
 
 	if (flag == 0)
 	{
-		size_a[0] = fabsl(w->man.CxMin) + fabsl(w->man.CxMax); // longueur ligne
-		size_a[1] = fabsl(w->man.CyMin) + fabsl(w->man.CyMax); // hauteur colonne
-		m_ra[0] = 0; //origin point 500,500
-		m_ra[1] = 0;
 		flag = 1;
+		ox = x;
+		oy = y;
 	}
-	size_b[0] = size_a[0] / 1.25; //x axis zoom step
-	size_b[1] = size_a[1] / 1.25; //y axis zoom step
-	if (button == 1)
-	{
-/*		clear_img(&w->pic2);
-		// x ref a = 'x input' rapporte a echelle 'ref a' en fct de cxmin
-		m_ra[0] = (m_xy[0] / LARG * size_a[0]) + w->man.CxMin;
-		m_ra[1] = (m_xy[1] / HAUT * size_a[1]) + w->man.CyMin;
-		// x ref 'b' = 'x input' in 'ref b'
-		m_rb[0] = (m_xy[0] / LARG * size_b[0]) - (size_b[0] / 2);
-		m_rb[1] = (m_xy[1] / HAUT * size_b[1]) - (size_b[1] / 2);
-		ra_rb[0] = m_ra[0] - m_rb[0];
-		ra_rb[1] = m_ra[1] - m_rb[1];
-		w->man.CxMin = (-size_b[0] / 2) + ra_rb[0];
-		w->man.CxMax = (size_b[0] / 2) + ra_rb[0];
-		w->man.CyMin = (-size_b[1] / 2) + ra_rb[1];
-		w->man.CyMax = (size_b[1] / 2) + ra_rb[1];
-	//printf("%Lf, %Lf, %Lf, %Lf\n",w->man.CxMin, w->man.CxMax, w->man.CyMin, w->man.CyMax);
-		w->man.PixelWidth = (w->man.CxMax - w->man.CxMin) / w->man.iXmax;
-		w->man.PixelHeight = (w->man.CyMax - w->man.CyMin) / w->man.iYmax;
-		ft_mandelbrot(w);
-		size_a[0] = size_b[0];
-		size_a[1] = size_b[1];
-*/	}
-	if (button == 2)
-	{
-	}
-	if (button == 3)
-	{
-	}
+	w->jul.cRe += (float)(x - ox) / 1000;
+	w->jul.cIm += (float)(y - oy) / 1000;
+
+//	printf("%f, %f\n", w->jul.cRe, w->jul.cIm);
+	clear_img(&w->pic2);
+	ft_julia(w);
+	ox = x;
+	oy = y;
 	return (0);
 }
