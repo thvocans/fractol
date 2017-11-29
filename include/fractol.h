@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/25 04:53:11 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:14:37 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ struct	s_mlx
 {
 	void	*mlx;
 	int		cur_win;
+
 //window1
 	void	*win1;
 	t_img	img1;
@@ -105,6 +106,7 @@ struct	s_mlx
 	t_jul	jul;
 	t_key	key;
 	int		key_down[300];
+	int		mid[2];
 };
 
 int		press_win1(int key, t_mlx *w);
@@ -113,8 +115,8 @@ int		press_win2(int key, t_mlx *w);
 int		release_win2(int key, t_mlx *w);
 void	ft_init_key(t_key *key);
 int		ft_key(t_mlx *w, void *win, int *pic);
-void	ft_mandel_init(t_man *m);
-void	ft_jul_init(t_jul *j);
+void	ft_mandel_init(t_mlx *w);
+void	ft_jul_init(t_mlx *w);
 void	ft_mandelbrot(t_mlx *w);
 void	ft_julia(t_mlx *w);
 int		ft_color(int iter);

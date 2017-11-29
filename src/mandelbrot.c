@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:08:11 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/22 20:22:26 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:11:12 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,21 @@
 **
 */
 
-void	ft_mandel_init(t_man *m)
+void	ft_mandel_init(t_mlx *w)
 {
-	m->iXmax = LARG;
-	m->iYmax = HAUT;
-	m->CxMin = -2.5;
-	m->CxMax = 1.5;
-	m->CyMin = -2.0;
-	m->CyMax = 2.0;
-	m->PixelWidth = (m->CxMax - m->CxMin) / m->iXmax;
-	m->PixelHeight = (m->CyMax - m->CyMin) / m->iYmax;
-	m->IterationMax = 200;
-	m->EscapeRadius = 2;
-	m->ER2 = m->EscapeRadius * m->EscapeRadius;
+	w->mid[0] = LARG / 2;
+	w->mid[1] = HAUT / 2;
+	w->man.iXmax = LARG;
+	w->man.iYmax = HAUT;
+	w->man.CxMin = -2.5;
+	w->man.CxMax = 1.5;
+	w->man.CyMin = -2.0;
+	w->man.CyMax = 2.0;
+	w->man.PixelWidth = (w->man.CxMax - w->man.CxMin) / w->man.iXmax;
+	w->man.PixelHeight = (w->man.CyMax - w->man.CyMin) / w->man.iYmax;
+	w->man.IterationMax = 200;
+	w->man.EscapeRadius = 2;
+	w->man.ER2 = w->man.EscapeRadius * w->man.EscapeRadius;
 }
 
 int	ft_color(int iter)

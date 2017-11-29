@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:33:48 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/25 04:53:12 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:17:39 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,18 @@
 **	pick some values for the constant c, this determines the shape of the Julia Set
 */
 
-void	ft_jul_init(t_jul *j)
+void	ft_jul_init(t_mlx *w)
 {
-	j->wl = LARG;
-	j->h = HAUT;
-	j->zoom = 1;
-	j->moveX = 0;
-	j->moveY = 0;
-	j->maxit = 200;
-	j->cRe = -0.7;
-	j->cIm = 0.27015;
+	w->mid[0] = LARG / 2;
+	w->mid[1] = HAUT / 2;
+	w->jul.wl = LARG;
+	w->jul.h = HAUT;
+	w->jul.zoom = 1;
+	w->jul.moveX = 0;
+	w->jul.moveY = 0;
+	w->jul.maxit = 200;
+	w->jul.cRe = -0.7;
+	w->jul.cIm = 0.27015;
 }
 
 void	ft_julia(t_mlx *w)

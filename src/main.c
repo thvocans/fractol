@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/25 02:23:16 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:07:51 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		mandel_main(t_mlx *w)
 	w->img1.pt = mlx_new_image(w->mlx, LARG, HAUT);
 	w->pic1 = (int*)mlx_get_data_addr(w->img1.pt, &(w->img1.bpp),\
 			&(w->img1.ln), &(w->img1.end));
-	ft_mandel_init(&w->man);
+	ft_mandel_init(w);
 	ft_mandelbrot(w);
 	mlx_put_image_to_window(w->mlx, w->win1, w->img1.pt, 0, 0);
 	man_loop(w);
@@ -63,7 +63,7 @@ int		julia_main(t_mlx *w)
 	w->img2.pt = mlx_new_image(w->mlx, LARG, HAUT);
 	w->pic2 = (int*)mlx_get_data_addr(w->img2.pt, &(w->img2.bpp),\
 			&(w->img2.ln), &(w->img2.end));
-	ft_jul_init(&w->jul);
+	ft_jul_init(w);
 	ft_julia(w);
 	mlx_put_image_to_window(w->mlx, w->win2, w->img2.pt, 0, 0);
 	jul_loop(w);
