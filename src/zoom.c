@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:55:21 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/29 18:20:23 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:24:02 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_jul_zoom(t_mlx *w, long double x, long double y , float zoom)
 	j->zoom *= zoom;
 	zb[0] = 1.5 * (x - w->mid[0]) / (j->zoom * w->mid[0]) + j->moveX;
 	zb[1] = (y - w->mid[1]) / (0.5 * j->zoom * HAUT) + j->moveY;
-	j->moveX += za[0] - zb[0];//zba[0];
-	j->moveY += za[1] - zb[1];//zba[1];
+	j->moveX += za[0] - zb[0];
+	j->moveY += za[1] - zb[1];
 	clear_img(&w->pic2);
 	ft_julia(w);
 }
@@ -37,7 +37,6 @@ void	ft_man_zoom(t_mlx *w, long double x, long double y, float zoom)
 	static int			flag = 0;
 	long double			size_b[2]; // Referentiel 'b' (post zoom)
 	long double			m_rb[2]; //XY dans ref post zoom
-	long double			ra_rb[2]; //Ra XY minus Rb ref
 
 	printf("%d, %d\n",(int)x, (int)y);
 
@@ -57,12 +56,10 @@ void	ft_man_zoom(t_mlx *w, long double x, long double y, float zoom)
 // x ref 'b' = 'x input' in 'ref b'
 	m_rb[0] = (x / LARG * size_b[0]) - (size_b[0] / 2);
 	m_rb[1] = (y / HAUT * size_b[1]) - (size_b[1] / 2);
-	ra_rb[0] = m_ra[0] - m_rb[0];
-	ra_rb[1] = m_ra[1] - m_rb[1];
-	w->man.CxMin = (-size_b[0] / 2) + ra_rb[0];
-	w->man.CxMax = (size_b[0] / 2) + ra_rb[0];
-	w->man.CyMin = (-size_b[1] / 2) + ra_rb[1];
-	w->man.CyMax = (size_b[1] / 2) + ra_rb[1];
+	w->man.CxMin = (-size_b[0] / 2) + (m_ra[0] - m_rb[0]);
+	w->man.CxMax = (size_b[0] / 2) + (m_ra[0] - m_rb[0]);
+	w->man.CyMin = (-size_b[1] / 2) + (m_ra[1] - m_rb[1]);
+	w->man.CyMax = (size_b[1] / 2) + (m_ra[1] - m_rb[1]);
 	w->man.PixelWidth = (w->man.CxMax - w->man.CxMin) / w->man.iXmax;
 	w->man.PixelHeight = (w->man.CyMax - w->man.CyMin) / w->man.iYmax;
 	clear_img(&w->pic1);
