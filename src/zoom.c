@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:55:21 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/29 18:18:05 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:20:23 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@ void	ft_jul_zoom(t_mlx *w, long double x, long double y , float zoom)
 	j = &w->jul;
 	double za[2];
 	double zb[2];
-	double zba[2];
 	za[0] = 1.5 * (x - w->mid[0]) / (j->zoom * w->mid[0]) + j->moveX;
-	za[1] = (y - HAUT / 2) / (0.5 * j->zoom * HAUT) + j->moveY;
+	za[1] = (y - w->mid[1]) / (0.5 * j->zoom * HAUT) + j->moveY;
 	j->zoom *= zoom;
 	zb[0] = 1.5 * (x - w->mid[0]) / (j->zoom * w->mid[0]) + j->moveX;
-	zb[1] = (y - HAUT / 2) / (0.5 * j->zoom * HAUT) + j->moveY;
-	zba[0] = za[0] - zb[0];
-	zba[1] = za[1] - zb[1];
-	j->moveX += zba[0];
-	j->moveY += zba[1];
+	zb[1] = (y - w->mid[1]) / (0.5 * j->zoom * HAUT) + j->moveY;
+	j->moveX += za[0] - zb[0];//zba[0];
+	j->moveY += za[1] - zb[1];//zba[1];
 	clear_img(&w->pic2);
 	ft_julia(w);
 }
