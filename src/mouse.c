@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:15:18 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/28 23:26:29 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/12/01 17:19:29 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ int	ft_move_mouse(int x, int y, t_mlx *w)
 		ox = x;
 		oy = y;
 	}
-	w->jul.cRe += (float)(x - ox) / 1000;
-	w->jul.cIm += (float)(y - oy) / 1000;
-
-//	printf("%f, %f\n", w->jul.cRe, w->jul.cIm);
-	clear_img(&w->pic2);
-	ft_julia(w);
-	ox = x;
-	oy = y;
+	if (w->jul.mouseon)
+	{
+		w->jul.cRe += (float)(x - ox) / 1000;
+		w->jul.cIm += (float)(y - oy) / 1000;
+		clear_img(&w->pic2);
+		ft_julia(w);
+		ox = x;
+		oy = y;
+	}
 	return (0);
 }

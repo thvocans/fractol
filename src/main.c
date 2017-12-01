@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/29 18:07:51 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/12/01 17:20:16 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	jul_loop(t_mlx *w)
 	mlx_hook(w->win2, 2, (1L << 0), &press_win2, w);
 	mlx_hook(w->win2, 3, (1L << 1), &release_win2, w);
 	mlx_hook(w->win2, 4, (1L << 2), &jul_mouse, w);
-//	mlx_hook(w->win2, 6, (1L << 7), &ft_move_mouse, w);
+	mlx_hook(w->win2, 6, (1L << 7), &ft_move_mouse, w);
 	mlx_hook(w->win2, 17, (1L << 17), &ft_error, (void *)5);
 }
 
@@ -78,6 +78,7 @@ int		main(int ac, char **av)
 	ag = ft_args_check(ac, av);
 	ft_init_key(&w.key);
 	w.mlx = mlx_init();
+	w.jul.mouseon = 1;
 	av[0] = "";
 	if (ag[0])
 		mandel_main(&w);

@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/29 18:14:37 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/12/01 17:19:25 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ struct	s_jul
 	double	moveX;
 	double	moveY;
 	int		maxit;
-
+	int		mouseon;
 };
 
 struct	s_mlx

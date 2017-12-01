@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 13:07:21 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/23 13:08:29 by thvocans         ###   ########.fr       */
+/*   Updated: 2017/12/01 17:23:34 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ int		ft_key(t_mlx *w, void *win, int *pic)
 		mlx_put_image_to_window(w->mlx, win, pic, 0, 0);
 	if (K_UP)
 		mlx_put_image_to_window(w->mlx, win, pic, 0, 0);
+	if (K_M)
+		w->jul.mouseon = w->jul.mouseon ? 0 : 1;
 	return (0);
 }
