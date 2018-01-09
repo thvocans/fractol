@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:55:21 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/09 19:54:14 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/09 21:04:31 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,3 +105,22 @@ void	ft_cool_zoom(t_mlx *w, long double x, long double y, float zoom)
 	size_a[0] = size_b[0];
 	size_a[1] = size_b[1];
 }
+
+void	ft_cosh_zoom(t_mlx *w, long double x, long double y , float zoom)
+{
+	t_jul *j;
+
+	j = &w->cos;
+	double za[2];
+	double zb[2];
+	za[0] = 1.5 * (x - w->mid[0]) / (j->zoom * w->mid[0]) + j->moveX;
+	za[1] = (y - w->mid[1]) / (0.5 * j->zoom * HAUT) + j->moveY;
+	j->zoom *= zoom;
+	zb[0] = 1.5 * (x - w->mid[0]) / (j->zoom * w->mid[0]) + j->moveX;
+	zb[1] = (y - w->mid[1]) / (0.5 * j->zoom * HAUT) + j->moveY;
+	j->moveX += za[0] - zb[0];
+	j->moveY += za[1] - zb[1];
+	clear_img(&w->pic4);
+	ft_cosh(w);
+}
+

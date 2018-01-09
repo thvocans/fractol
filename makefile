@@ -6,7 +6,7 @@
 #    By: thvocans <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/23 19:03:58 by thvocans          #+#    #+#              #
-#    Updated: 2018/01/04 17:29:06 by thvocans         ###   ########.fr        #
+#    Updated: 2018/01/09 21:39:59 by thvocans         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC = main ft_args_check\
 	  ft_key_init key_func key_action\
 	  mouse zoom ft_color\
 	  mandelbrot coolmandel\
-	  julia
+	  julia cosh
 
 C_FILE = $(addsuffix .c,$(addprefix $(C_FOLD),$(SRC)))
 

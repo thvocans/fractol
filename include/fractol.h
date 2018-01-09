@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/04 17:43:25 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/09 21:01:44 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,16 @@ struct	s_mlx
 	t_img	img3;
 	int		*pic3;
 	
+//window4
+	void	*win4;
+	t_img	img4;
+	int		*pic4;
+
 	t_man	man;
 	t_man	col;
 	t_jul	jul;
+	t_jul	cos;
+
 	t_key	key;
 	int		key_down[300];
 	int		mid[2];
@@ -135,6 +142,13 @@ void	ft_cool_init(t_mlx *w);
 void	ft_coolbrot(t_mlx *w);
 int		cool_mouse(int button, int x, int y, t_mlx *w);
 void	ft_cool_zoom(t_mlx *w, long double x, long double y, float zoom);
+
+int		press_win4(int key, t_mlx *w);
+int		release_win4(int key, t_mlx *w);
+void	ft_cosh_init(t_mlx *w);
+void	ft_cosh(t_mlx *w);
+int		cosh_mouse(int button, int x, int y, t_mlx *w);
+void	ft_cosh_zoom(t_mlx *w, long double x, long double y, float zoom);
 
 void	ft_init_key(t_key *key);
 int		ft_key(t_mlx *w, void *win, int *pic);
