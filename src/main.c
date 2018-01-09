@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2017/12/01 17:20:16 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/09 20:25:45 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,17 @@ void	jul_loop(t_mlx *w)
 	mlx_hook(w->win2, 17, (1L << 17), &ft_error, (void *)5);
 }
 
+void	cool_loop(t_mlx *w)
+{
+	mlx_hook(w->win3, 2, (1L << 0), &press_win3, w);
+	mlx_hook(w->win3, 3, (1L << 1), &release_win3, w);
+	mlx_hook(w->win3, 4, (1L << 2), &cool_mouse, w);
+	mlx_hook(w->win3, 17, (1L << 17), &ft_error, (void *)5);
+}
+
 int		mandel_main(t_mlx *w)
 {
-	w->win1 = mlx_new_window(w->mlx, LARG, HAUT, "Mandelcute");
+	w->win1 = mlx_new_window(w->mlx, LARG, HAUT, "Mandelbread");
 	w->img1.pt = mlx_new_image(w->mlx, LARG, HAUT);
 	w->pic1 = (int*)mlx_get_data_addr(w->img1.pt, &(w->img1.bpp),\
 			&(w->img1.ln), &(w->img1.end));
@@ -54,6 +62,19 @@ int		mandel_main(t_mlx *w)
 	ft_mandelbrot(w);
 	mlx_put_image_to_window(w->mlx, w->win1, w->img1.pt, 0, 0);
 	man_loop(w);
+	return (1);
+}
+
+int		cool_main(t_mlx *w)
+{
+	w->win3 = mlx_new_window(w->mlx, LARG, HAUT, "Cool bread");
+	w->img3.pt = mlx_new_image(w->mlx, LARG, HAUT);
+	w->pic3 = (int*)mlx_get_data_addr(w->img3.pt, &(w->img3.bpp),\
+			&(w->img3.ln), &(w->img3.end));
+	ft_cool_init(w);
+	ft_coolbrot(w);
+	mlx_put_image_to_window(w->mlx, w->win3, w->img3.pt, 0, 0);
+	cool_loop(w);
 	return (1);
 }
 
@@ -84,17 +105,8 @@ int		main(int ac, char **av)
 		mandel_main(&w);
 	if (ag[1])
 		julia_main(&w);
+	if (ag[2])
+		cool_main(&w);
 	mlx_do_key_autorepeatoff(&w);
 	mlx_loop(w.mlx);
 }
-
-
-//	mlx_hook(w.win1, 2, (1L << 0), &press_win1,  &w);
-//	mlx_hook(w.win1, 3, (1L << 1), &release_win1, &w);
-//	mlx_hook(w.win1, 4, (1L << 2), &man_mouse, &w);
-
-//	mlx_hook(w.win2, 2, (1L << 0), &press_win2, &w);
-//	mlx_hook(w.win2, 3, (1L << 1), &release_win2, &w);
-//	mlx_hook(w.win2, 6, (1L << 7), &ft_move_mouse, &w);
-//	mlx_hook(w.win, 5, (1L << 3), &releasemouse, &w);
-//	mlx_loop_hook(w->mlx, &ft_latent, &w);

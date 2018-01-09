@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:08:11 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/29 18:11:12 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/04 15:47:00 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,6 @@ void	ft_mandel_init(t_mlx *w)
 	w->man.IterationMax = 200;
 	w->man.EscapeRadius = 2;
 	w->man.ER2 = w->man.EscapeRadius * w->man.EscapeRadius;
-}
-
-int	ft_color(int iter)
-{
-	int out;
-	unsigned char *pt;
-
-	out = 0;
-	pt = (unsigned char *)&out;
-	if (iter % 2 == 0)
-		out = (iter + (iter * 3 << 8) + (iter * 5 << 8)) & 0xFFFFFF;
-	else
-		out = (iter * 4 + (iter * 2 << 7) + (iter * 3 << 7)) & 0xFFFFFF;
-	return (out);
 }
 
 void	ft_mandelbrot(t_mlx *w)

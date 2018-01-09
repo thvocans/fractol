@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2017/12/01 17:19:25 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/04 17:43:25 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,13 @@ struct	s_mlx
 	void	*win2;
 	t_img	img2;
 	int		*pic2;
+//window3
+	void	*win3;
+	t_img	img3;
+	int		*pic3;
 	
 	t_man	man;
+	t_man	col;
 	t_jul	jul;
 	t_key	key;
 	int		key_down[300];
@@ -111,21 +116,30 @@ struct	s_mlx
 
 int		press_win1(int key, t_mlx *w);
 int		release_win1(int key, t_mlx *w);
+void	ft_mandel_init(t_mlx *w);
+void	ft_mandelbrot(t_mlx *w);
+int		man_mouse(int button, int x, int y, t_mlx *w);
+void	ft_man_zoom(t_mlx *w, long double x, long double y, float zoom);
+
 int		press_win2(int key, t_mlx *w);
 int		release_win2(int key, t_mlx *w);
-void	ft_init_key(t_key *key);
-int		ft_key(t_mlx *w, void *win, int *pic);
-void	ft_mandel_init(t_mlx *w);
 void	ft_jul_init(t_mlx *w);
-void	ft_mandelbrot(t_mlx *w);
 void	ft_julia(t_mlx *w);
-int		ft_color(int iter);
-int		pressmouse(int button, int x, int y, t_mlx *w);
-int		man_mouse(int button, int x, int y, t_mlx *w);
 int		jul_mouse(int button, int x, int y, t_mlx *w);
 int		ft_move_mouse(int x, int y, t_mlx *w);
-void	ft_man_zoom(t_mlx *w, long double x, long double y, float zoom);
 void	ft_jul_zoom(t_mlx *w, long double x, long double y, float zoom);
+
+int		press_win3(int key, t_mlx *w);
+int		release_win3(int key, t_mlx *w);
+void	ft_cool_init(t_mlx *w);
+void	ft_coolbrot(t_mlx *w);
+int		cool_mouse(int button, int x, int y, t_mlx *w);
+void	ft_cool_zoom(t_mlx *w, long double x, long double y, float zoom);
+
+void	ft_init_key(t_key *key);
+int		ft_key(t_mlx *w, void *win, int *pic);
+int		ft_color(int iter);
+int		pressmouse(int button, int x, int y, t_mlx *w);
 void	clear_img(int **pic);
 int		*ft_args_check(int ac, char **av);
 

@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 19:17:43 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/23 15:06:37 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/04 17:35:29 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,25 @@ int		release_win2(int key, t_mlx *w)
 	ft_key_mask(w, key);
 	w->key.down[w->key.oct] = w->key.down[w->key.oct] ^ w->key.mask;
 	ft_key(w, w->win2, w->pic2);
+	return (0);
+}
+
+/*
+** window 3 press and release functions
+*/
+
+int		press_win3(int key, t_mlx *w)
+{
+	ft_key_mask(w, key);
+	w->key.down[w->key.oct] = w->key.down[w->key.oct] | w->key.mask;
+	ft_key(w, w->win3, w->pic3);
+	return (0);
+}
+
+int		release_win3(int key, t_mlx *w)
+{
+	ft_key_mask(w, key);
+	w->key.down[w->key.oct] = w->key.down[w->key.oct] ^ w->key.mask;
+	ft_key(w, w->win3, w->pic3);
 	return (0);
 }

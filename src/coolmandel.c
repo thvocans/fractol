@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:08:11 by thvocans          #+#    #+#             */
-/*   Updated: 2017/11/21 20:19:29 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/09 20:17:27 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,24 @@
 **
 */
 
-void	ft_init(t_man *m)
+void	ft_cool_init(t_mlx *w)
 {
-	m->iXmax = LARG;
-	m->iYmax = HAUT;
-	m->CxMin = -2.5;
-	m->CxMax = 1.5;
-	m->CyMin = -2.0;
-	m->CyMax = 2.0;
-	m->PixelWidth = (m->CxMax - m->CxMin) / m->iXmax;
-	m->PixelHeight = (m->CyMax - m->CyMin) / m->iYmax;
-	m->IterationMax = 200;
-	m->EscapeRadius = 2;
-	m->ER2 = m->EscapeRadius * m->EscapeRadius;
+	w->mid[0] = LARG / 2;
+	w->mid[1] = HAUT / 2;
+	w->col.iXmax = LARG;
+	w->col.iYmax = HAUT;
+	w->col.CxMin = -4.5;
+	w->col.CxMax = 0.9;
+	w->col.CyMin = -4.5;
+	w->col.CyMax = 0.3;
+	w->col.PixelWidth = (w->col.CxMax - w->col.CxMin) / w->col.iXmax;
+	w->col.PixelHeight = (w->col.CyMax - w->col.CyMin) / w->col.iYmax;
+	w->col.IterationMax = 200;
+	w->col.EscapeRadius = 2;
+	w->col.ER2 = w->col.EscapeRadius * w->col.EscapeRadius;
 }
 
-int	ft_color(int iter)
+static int	ft_coolor(int iter)
 {
 	int out;
 	unsigned char *pt;
@@ -49,16 +51,16 @@ int	ft_color(int iter)
 	out = 0;
 	pt = (unsigned char *)&out;
 	if (iter % 2 == 0)
-		out = (iter + (iter * 3 << 8) + (iter * 5 << 8)) & 0xFFFFFF;
+		out = (255 - iter + ((255 - iter * 10) << 7) + (iter * 3 << 16)) & 0xFFFFFF;
 	else
-		out = (iter * 4 + (iter * 2 << 7) + (iter * 3 << 7)) & 0xFFFFFF;
+		out = (iter * 4 + (iter << 8) + ((170 - iter * 2) << 16)) & 0xFFFFFF;
 	return (out);
 }
 
-void	ft_mandelbrot(t_mlx *w)
+void	ft_coolbrot(t_mlx *w)
 {
 	t_man	*m;
-	m = &w->man;
+	m = &w->col;
 	m->actuel = 0;
 	for (m->iY = 0;m->iY < m->iYmax; m->iY++)
 	{
@@ -83,9 +85,9 @@ void	ft_mandelbrot(t_mlx *w)
 				m->Iteration++;
 			}
 			if (m->Iteration != m->IterationMax)
-					w->pic[(m->iY * (LARG)) + m->iX] = ft_color(m->Iteration);
+					w->pic3[(m->iY * (LARG)) + m->iX] = ft_coolor(m->Iteration);
 			m->actuel++;
 		}
 	}
-	mlx_put_image_to_window(w->mlx, w->win, w->img.pt, 0, 0);
+	mlx_put_image_to_window(w->mlx, w->win3, w->img3.pt, 0, 0);
 }
