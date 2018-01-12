@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:33:48 by thvocans          #+#    #+#             */
-/*   Updated: 2017/12/02 03:48:39 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/12 01:04:01 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_jul_init(t_mlx *w)
 	w->jul.zoom = 1;
 	w->jul.moveX = 0;
 	w->jul.moveY = 0;
-	w->jul.maxit = 200;
+	w->jul.maxit = 150;
 	w->jul.cRe = -0.7;
 	w->jul.cIm = 0.27015;
 }

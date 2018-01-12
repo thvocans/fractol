@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 21:12:11 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/09 22:57:37 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/09 21:55:51 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,12 @@ void	ft_cosh_init(t_mlx *w)
 	w->mid[1] = HAUT / 2;
 	w->cos.wl = LARG;
 	w->cos.h = HAUT;
-	w->cos.zoom = 0.002;
+	w->cos.zoom = 1;
 	w->cos.moveX = 0;
 	w->cos.moveY = 0;
 	w->cos.maxit = 200;
-	w->cos.cRe = 1;
-	w->cos.cIm = 1;
-}
-
-int		ft_color2(int i)
-{
-	int out;
-	out = (255 - i * 3) + ((255 - i * i) << 8) + ((i * 6 )<< 16);
-	return (out);
+	w->cos.cRe = -1;
+	w->cos.cIm = -1;
 }
 
 void	ft_cosh(t_mlx *w)
@@ -66,20 +59,15 @@ void	ft_cosh(t_mlx *w)
 				j->oldRe = j->newRe;
 				j->oldIm = j->newIm;
 				//the actual iteration, the real and imaginary part are calculated
-				j->newRe = j->oldRe * j->oldRe - j->oldIm * j->oldIm + j->cRe;
+				j->newRe = cosh(j->oldRe) - j->oldIm * j->oldIm + j->cRe;
 				j->newIm = 2 * j->oldRe * j->oldIm + j->cIm;
-//				j->newRe = (j->oldRe * sinh(j->oldRe) - cosh(j->oldIm) + j->cRe)\
-//						   / sinh(j->oldRe);
-//				j->newIm = (j->oldIm * sinh(j->oldIm) - cosh(j->oldIm) + j->cIm)\
-//						   / sinh(j->oldIm);
 				//if the point is outside the circle with radius 2: stop
-				if (fabs (j->newRe - j->oldRe) < 0.00001 ||
-					fabs (j->newIm - j->oldIm) < 0.00001)
+				if (fabs(j->newRe - j->oldRe) < 0.001)
 					break;
 			}
 			//draw the pixel
 			if (i < j->maxit)
-				w->pic4[(y * LARG) + x] = ft_color2(i);
+				w->pic4[(y * LARG) + x] = ft_color(i);
 		}
 	}
 		mlx_put_image_to_window(w->mlx, w->win4, w->img4.pt, 0, 0);

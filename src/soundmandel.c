@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:08:11 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/12 04:36:24 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/12 04:14:25 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void	ft_coolbrot(t_mlx *w)
 			m->Iteration = 0;
 			while (m->Iteration < m->IterationMax && ((m->Zx2 + m->Zy2) < m->ER2))
 			{
-				m->Zx	= 2 * m->Zx * m->Zy + m->Cy;
-				m->Zy	= m->Zx2 - m->Zy2 + m->Cx;
-				m->Zy2	= m->Zx * m->Zx * tan(log(m->Zx));
-				m->Zx2	= m->Zy * m->Zy;
+				m->Zy	= 2 * m->Zx * m->Zy + m->Cy;
+				m->Zx	= m->Zx2 - m->Zy2 + m->Cx;
+				m->Zx2	= m->Zx * m->Zx * tan(m->Zx);
+				m->Zy2	= m->Zy * m->Zy;
 				m->Iteration++;
 			}
 			if (m->Iteration != m->IterationMax)

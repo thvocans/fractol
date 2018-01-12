@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 21:37:57 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/09 21:45:22 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/12 01:39:36 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int *ft_args_check(int ac, char **av)
 			out[0] = 1;
 		if (ft_strequ(av[i], "julia"))
 			out[1] = 1;
-		if (ft_strequ(av[i], "pinball"))
+		if (ft_strequ(av[i], "cool"))
 			out[2] = 1;
 		if (ft_strequ(av[i], "cosh"))
 			out[3] = 1;

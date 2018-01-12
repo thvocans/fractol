@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:55:21 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/09 21:04:31 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/12 00:53:18 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	ft_jul_zoom(t_mlx *w, long double x, long double y , float zoom)
 	zb[1] = (y - w->mid[1]) / (0.5 * j->zoom * HAUT) + j->moveY;
 	j->moveX += za[0] - zb[0];
 	j->moveY += za[1] - zb[1];
+	if (zoom > 1)
+		j->maxit += 5;
+	else
+		j->maxit -= 5;
+	printf("%d\n",j->maxit);
 	clear_img(&w->pic2);
 	ft_julia(w);
 }
