@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:59:32 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/09 21:46:28 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/12 22:40:02 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,21 @@ void	jul_loop(t_mlx *w)
 
 void	cool_loop(t_mlx *w)
 {
-	mlx_hook(w->win3, 2, (1L << 0), &press_win3, w);
-	mlx_hook(w->win3, 3, (1L << 1), &release_win3, w);
-	mlx_hook(w->win3, 4, (1L << 2), &cool_mouse, w);
-	mlx_hook(w->win3, 17, (1L << 17), &ft_error, (void *)5);
-}
-
-void	cosh_loop(t_mlx *w)
-{
+	printf("cool loop\n");
 	mlx_hook(w->win4, 2, (1L << 0), &press_win4, w);
 	mlx_hook(w->win4, 3, (1L << 1), &release_win4, w);
-	mlx_hook(w->win4, 4, (1L << 2), &cosh_mouse, w);
+	mlx_hook(w->win3, 4, (1L << 2), &cool_mouse, w);
 //	mlx_hook(w->win4, 6, (1L << 7), &ft_move_mouse, w);
 	mlx_hook(w->win4, 17, (1L << 17), &ft_error, (void *)5);
+}
+
+void	newton_loop(t_mlx *w)
+{
+	printf("newton loop\n");
+	mlx_hook(w->win3, 2, (1L << 0), &press_win3, w);
+	mlx_hook(w->win3, 3, (1L << 1), &release_win3, w);
+	mlx_hook(w->win4, 4, (1L << 2), &newton_mouse, w);
+	mlx_hook(w->win3, 17, (1L << 17), &ft_error, (void *)5);
 }
 
 int		mandel_main(t_mlx *w)
@@ -102,14 +104,14 @@ int		julia_main(t_mlx *w)
 
 int		cosh_main(t_mlx *w)
 {
-	w->win4 = mlx_new_window(w->mlx, LARG, HAUT, "cosh newton");
-	w->img4.pt = mlx_new_image(w->mlx, LARG, HAUT);
-	w->pic4 = (int*)mlx_get_data_addr(w->img4.pt, &(w->img4.bpp),\
-			&(w->img4.ln), &(w->img4.end));
-	ft_cosh_init(w);
-	ft_cosh(w);
-	mlx_put_image_to_window(w->mlx, w->win4, w->img4.pt, 0, 0);
-	cosh_loop(w);
+	w->win3 = mlx_new_window(w->mlx, LARG, HAUT, "cosh newton");
+	w->img3.pt = mlx_new_image(w->mlx, LARG, HAUT);
+	w->pic3 = (int*)mlx_get_data_addr(w->img3.pt, &(w->img3.bpp),\
+			&(w->img3.ln), &(w->img3.end));
+	ft_newton_init(w);
+	ft_newton(w);
+	mlx_put_image_to_window(w->mlx, w->win3, w->img3.pt, 0, 0);
+	newton_loop(w);
 	return (1);
 }
 

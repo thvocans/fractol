@@ -6,33 +6,30 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:55:21 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/12 00:53:18 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/12 22:32:12 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-void	ft_jul_zoom(t_mlx *w, long double x, long double y , float zoom)
+void	ft_jul_zoom(t_jul *j, long double x, long double y , float zoom)
 {
-	t_jul *j;
-
-	j = &w->jul;
 	double za[2];
 	double zb[2];
-	za[0] = 1.5 * (x - w->mid[0]) / (j->zoom * w->mid[0]) + j->moveX;
-	za[1] = (y - w->mid[1]) / (0.5 * j->zoom * HAUT) + j->moveY;
+	za[0] = 1.5 * (x - j->mid[0]) / (j->zoom * j->mid[0]) + j->moveX;
+	za[1] = (y - j->mid[1]) / (0.5 * j->zoom * HAUT) + j->moveY;
 	j->zoom *= zoom;
-	zb[0] = 1.5 * (x - w->mid[0]) / (j->zoom * w->mid[0]) + j->moveX;
-	zb[1] = (y - w->mid[1]) / (0.5 * j->zoom * HAUT) + j->moveY;
+	zb[0] = 1.5 * (x - j->mid[0]) / (j->zoom * j->mid[0]) + j->moveX;
+	zb[1] = (y - j->mid[1]) / (0.5 * j->zoom * HAUT) + j->moveY;
 	j->moveX += za[0] - zb[0];
 	j->moveY += za[1] - zb[1];
 	if (zoom > 1)
-		j->maxit += 5;
+		j->maxit += 2;
 	else
-		j->maxit -= 5;
+		j->maxit -= 2;
 	printf("%d\n",j->maxit);
-	clear_img(&w->pic2);
-	ft_julia(w);
+//	clear_img(&w->pic2);
+//	ft_julia(w);
 }
 
 void	ft_man_zoom(t_mlx *w, long double x, long double y, float zoom)
@@ -110,7 +107,7 @@ void	ft_cool_zoom(t_mlx *w, long double x, long double y, float zoom)
 	size_a[0] = size_b[0];
 	size_a[1] = size_b[1];
 }
-
+/*
 void	ft_cosh_zoom(t_mlx *w, long double x, long double y , float zoom)
 {
 	t_jul *j;
@@ -128,4 +125,4 @@ void	ft_cosh_zoom(t_mlx *w, long double x, long double y , float zoom)
 	clear_img(&w->pic4);
 	ft_cosh(w);
 }
-
+*/

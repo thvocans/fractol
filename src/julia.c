@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:33:48 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/12 01:04:01 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/12 22:34:17 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 
 void	ft_jul_init(t_mlx *w)
 {
-	w->mid[0] = LARG / 2;
-	w->mid[1] = HAUT / 2;
+	w->jul.mid[0] = LARG / 2;
+	w->jul.mid[1] = HAUT / 2;
 	w->jul.wl = LARG;
 	w->jul.h = HAUT;
 	w->jul.zoom = 1;
