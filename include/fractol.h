@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/12 22:33:59 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/13 16:48:54 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ struct	s_jul
 struct	s_mlx
 {
 	void	*mlx;
-	int		cur_win;
+//	int		cur_win;
 
 //window1
 	void	*win1;
@@ -118,9 +118,15 @@ struct	s_mlx
 	t_jul	cos;
 
 	int		mid[2];
+	void	*cur_win;
+	int		*cur_pic;
 	t_key	key;
 	int		key_down[300];
 };
+
+int		press_win(int key, t_mlx *w);
+int		release_win(int key, t_mlx *w);
+
 
 int		press_win1(int key, t_mlx *w);
 int		release_win1(int key, t_mlx *w);
@@ -142,7 +148,7 @@ int		release_win3(int key, t_mlx *w);
 void	ft_cool_init(t_mlx *w);
 void	ft_coolbrot(t_mlx *w);
 int		cool_mouse(int button, int x, int y, t_mlx *w);
-void	ft_cool_zoom(t_mlx *w, long double x, long double y, float zoom);
+void	ft_cool_zoom(t_man *c, long double x, long double y, float zoom);
 
 int		press_win4(int key, t_mlx *w);
 int		release_win4(int key, t_mlx *w);

@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:33:48 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/12 22:34:17 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/13 18:02:02 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	ft_julia(t_mlx *w)
 			//draw the pixel
 			if (i < j->maxit)
 				w->pic2[(y * LARG) + x] = ft_color(i);
+			else
+				w->pic2[(y * LARG) + x] = 0x000000;
 		}
 	}
 		mlx_put_image_to_window(w->mlx, w->win2, w->img2.pt, 0, 0);
