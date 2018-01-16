@@ -6,16 +6,16 @@
 #    By: thvocans <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/23 19:03:58 by thvocans          #+#    #+#              #
-#    Updated: 2018/01/13 18:31:38 by thvocans         ###   ########.fr        #
+#    Updated: 2018/01/16 18:38:51 by thvocans         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all fclean clean re libmlx.a libclean libfclean mlxclean libft.a relib
 
-NAME = exe
+NAME = fractol
 
 CC = @gcc $(FLAGS)
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -O2
 #FLAGS = -Wall -Wextra -Werror -lmlx -L./sierra -framework OpenGL -framework Appkit
 
 C_FOLD = ./src/
@@ -27,8 +27,8 @@ GLIB_FOLD = ./sierra
 LIB = $(LIB_FOLD)/libft.a
 GLIB = $(GLIB_FOLD)/libmlx.a
 
-SRC = main ft_args_check\
-	  ft_key_init key_func key_action\
+SRC = main main_loop ft_args_check ft_clear_img\
+	  ft_key_init key_func key_func2 key_action\
 	  mouse zoom ft_color\
 	  mandelbrot julia newton
 
@@ -74,7 +74,7 @@ clean: libclean
 libfclean:
 	@$(MAKE) -C libft fclean
 
-fclean: clean libfclean
+fclean: clean libfclean mlxclean
 	@/bin/rm -f $(NAME)
 	@echo "\033[32mrm $(NAME)\033[0m"
 

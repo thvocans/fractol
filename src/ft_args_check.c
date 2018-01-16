@@ -6,15 +6,31 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 21:37:57 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/16 14:17:29 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/16 17:25:24 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-int *ft_args_check(int ac, char **av)
+static void	ft_arg_loop(int **out, int ac, char **av)
 {
-	int *out;
+	int i;
+
+	i = 0;
+	while (++i < ac)
+	{
+		if (ft_strequ(av[i], "mandelbrot"))
+			out[0][0] = 1;
+		if (ft_strequ(av[i], "julia"))
+			out[0][1] = 1;
+		if (ft_strequ(av[i], "newton"))
+			out[0][2] = 1;
+	}
+}
+
+int			*ft_args_check(int ac, char **av)
+{
+	int	*out;
 	int	i;
 	int	flag;
 
@@ -28,15 +44,7 @@ int *ft_args_check(int ac, char **av)
 	}
 	if (!(out = ft_memalloc(sizeof(int) * 8)))
 		ft_error(NO_MEM);
-	while (++i < ac)
-	{
-		if (ft_strequ(av[i], "mandelbrot"))
-			out[0] = 1;
-		if (ft_strequ(av[i], "julia"))
-			out[1] = 1;
-		if (ft_strequ(av[i], "newton"))
-			out[2] = 1;
-	}
+	ft_arg_loop(&out, ac, av);
 	i = 0;
 	while (i < 8)
 		if (out[i++] != 0)

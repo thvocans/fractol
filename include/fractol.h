@@ -6,17 +6,16 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 18:29:19 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/13 16:48:54 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/16 18:24:32 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define LARG 600
-# define HAUT 500
+# define LARG 1200
+# define HAUT 1000
 
 # include "../sierra/mlx.h"
-# include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
@@ -47,43 +46,43 @@ struct	s_key
 
 struct	s_man
 {
-	long double Cx;
-	long double Cy;
-	long double CxMin;
-	long double CxMax;
-	long double CyMin;
-	long double CyMax;
-	long double PixelWidth;
-	long double PixelHeight;
-	long double Zx;
-	long double Zy;
-	long double Zx2;
-	long double Zy2;
-	long double EscapeRadius;
-	unsigned char *color;
-	int iY;
-	int iX;
-	int iXmax;
-	int iYmax;
-	int Iteration;
-	int IterationMax;
-	int actuel;
-long double ER2;
+	long double		cx;
+	long double		cy;
+	long double		xmin;
+	long double		xmax;
+	long double		ymin;
+	long double		ymax;
+	long double		pi_w;
+	long double		pi_h;
+	long double		zx;
+	long double		zy;
+	long double		zx2;
+	long double		zy2;
+	long double		escape;
+	long double		esc2;
+	unsigned char	*color;
+	int				iy;
+	int				ix;
+	int				ixmax;
+	int				iymax;
+	int				iter;
+	int				itermax;
+	int				cur;
 };
 
 struct	s_jul
 {
 	int		wl;
 	int		h;
-	double	cRe;
-	double	cIm;
-	double	newRe;
-	double	newIm;
-	double	oldRe;
-	double	oldIm;
+	double	cre;
+	double	cim;
+	double	newre;
+	double	newim;
+	double	oldre;
+	double	oldim;
 	double	zoom;
-	double	moveX;
-	double	moveY;
+	double	movex;
+	double	movey;
 	int		maxit;
 	int		mouseon;
 	int		mid[2];
@@ -92,22 +91,19 @@ struct	s_jul
 struct	s_mlx
 {
 	void	*mlx;
-//	int		cur_win;
 
-//window1
 	void	*win1;
 	t_img	img1;
 	int		*pic1;
-//window2
+
 	void	*win2;
 	t_img	img2;
 	int		*pic2;
-//window3
+
 	void	*win3;
 	t_img	img3;
 	int		*pic3;
-	
-//window4
+
 	void	*win4;
 	t_img	img4;
 	int		*pic4;
@@ -127,6 +123,9 @@ struct	s_mlx
 int		press_win(int key, t_mlx *w);
 int		release_win(int key, t_mlx *w);
 
+void	man_loop(t_mlx *w);
+void	jul_loop(t_mlx *w);
+void	newton_loop(t_mlx *w);
 
 int		press_win1(int key, t_mlx *w);
 int		release_win1(int key, t_mlx *w);

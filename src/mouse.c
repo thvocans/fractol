@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 21:15:18 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/13 18:23:48 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/16 17:25:48 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	man_mouse(int button, int x, int y, t_mlx *w)
 {
-	printf("man mouse\n");
 	if ((button == 4 || button == 1) && x >= 0 && y >= 0)
 		ft_man_zoom(w, x, y, 1.25);
 	if ((button == 5 || button == 2) && x >= 0 && y >= 0)
@@ -22,9 +21,8 @@ int	man_mouse(int button, int x, int y, t_mlx *w)
 	return (0);
 }
 
-int jul_mouse(int button, int x, int y, t_mlx *w)
+int	jul_mouse(int button, int x, int y, t_mlx *w)
 {
-	printf("jul mouse\n");
 	if ((button == 4 || button == 1) && x >= 0 && y >= 0)
 		ft_jul_zoom(&w->jul, x, y, 1.25);
 	if ((button == 5 || button == 2) && x >= 0 && y >= 0)
@@ -34,10 +32,10 @@ int jul_mouse(int button, int x, int y, t_mlx *w)
 	return (0);
 }
 
-int newton_mouse(int button, int x, int y, t_mlx *w)
+int	newton_mouse(int button, int x, int y, t_mlx *w)
 {
 	static int i = 0;
-	printf("newton mouse\n");
+
 	if ((button == 4 || button == 1) && x >= 0 && y >= 0)
 		ft_jul_zoom(&w->cos, x, y, 1.25);
 	if ((button == 5 || button == 2) && x >= 0 && y >= 0)
@@ -64,8 +62,8 @@ int	ft_move_mouse(int x, int y, t_mlx *w)
 	}
 	if (w->jul.mouseon)
 	{
-		w->jul.cRe += (float)(x - ox) / 1000;
-		w->jul.cIm += (float)(y - oy) / 1000;
+		w->jul.cre += (float)(x - ox) / 1000;
+		w->jul.cim += (float)(y - oy) / 1000;
 		clear_img(&w->pic2);
 		ft_julia(w);
 		ox = x;

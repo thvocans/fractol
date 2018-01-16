@@ -1,11 +1,11 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard.c                                         :+:      :+:    :+:   */
+/*   key_func2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/14 19:17:43 by thvocans          #+#    #+#             */
+/*   Created: 2018/01/16 15:22:50 by thvocans          #+#    #+#             */
 /*   Updated: 2018/01/16 17:25:45 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -21,41 +21,41 @@ static inline void	ft_key_mask(t_mlx *w, int key)
 }
 
 /*
-** generic press and release functions
+** window 2 press and release functions
 */
 
-int					press_win(int key, t_mlx *w)
+int					press_win2(int key, t_mlx *w)
 {
 	ft_key_mask(w, key);
 	w->key.down[w->key.oct] = w->key.down[w->key.oct] | w->key.mask;
-	ft_key(w, w->cur_win, w->cur_pic);
+	ft_key(w, w->win2, w->pic2);
 	return (0);
 }
 
-int					release_win(int key, t_mlx *w)
+int					release_win2(int key, t_mlx *w)
 {
 	ft_key_mask(w, key);
 	w->key.down[w->key.oct] = w->key.down[w->key.oct] ^ w->key.mask;
-	ft_key(w, w->cur_win, w->cur_pic);
+	ft_key(w, w->win2, w->pic2);
 	return (0);
 }
 
 /*
-** window 1 press and release functions
+** window 3 press and release functions
 */
 
-int					press_win1(int key, t_mlx *w)
+int					press_win3(int key, t_mlx *w)
 {
 	ft_key_mask(w, key);
 	w->key.down[w->key.oct] = w->key.down[w->key.oct] | w->key.mask;
-	ft_key(w, w->win1, w->pic1);
+	ft_key(w, w->win3, w->pic3);
 	return (0);
 }
 
-int					release_win1(int key, t_mlx *w)
+int					release_win3(int key, t_mlx *w)
 {
 	ft_key_mask(w, key);
 	w->key.down[w->key.oct] = w->key.down[w->key.oct] ^ w->key.mask;
-	ft_key(w, w->win1, w->pic1);
+	ft_key(w, w->win3, w->pic3);
 	return (0);
 }
