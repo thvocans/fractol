@@ -6,7 +6,7 @@
 /*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 21:37:57 by thvocans          #+#    #+#             */
-/*   Updated: 2018/01/13 16:30:24 by thvocans         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:17:29 by thvocans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int *ft_args_check(int ac, char **av)
 	if (ac < 2)
 	{
 		ft_putstr("usage :\tfractol param1 param2 ...\n");
-		ft_putstr("  params: julia mandelbrot pinball cosh\n");
+		ft_putstr("  params: julia mandelbrot newton\n");
 		exit(1);
 	}
 	if (!(out = ft_memalloc(sizeof(int) * 8)))
